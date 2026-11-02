@@ -11,6 +11,6 @@ Five pieces of client feedback, applied to the homepage source and build.
 
 Also swept the last em dash ("Custom-built solutions & kits" card) to a colon.
 
-**Category page not yet updated.** It shares the header, so items 1 and 2 also apply there. Its product photos only exist inside the deployed `category.html`, which could not be retrieved this session (Netlify blocked from the workspace, design canvas gone). Needs the current `category.html` to finish; `claude/build/category.html` in this project is still the previous version.
+**Category page.** Items 1 and 2 (one-line nav, sentence removed) are applied there too. Its source was recovered from a browser-saved copy of the live page, with links mapped back to the originals and every embedded image checked against the asset folder.
 
 The homepage source in `claude/source/Main.dc.html` was reconstructed from the deployed build, since the canvas could not be read. Content is the same; only whitespace differs.
