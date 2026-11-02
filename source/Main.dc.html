@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+
+    :root{
+      --red:#ac0000; --red-dk:#8d0000; --navy:#1b2a4a; --ink:#202329;
+      --muted:#62666e; --line:#e6e7e9; --line-2:#d9dadd;
+      --panel:#e8edf5; --soft:#f6f7f8; --green:#167a3c; --amber:#a86400;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;}
+    .rj{width:100%;background:#fff;color:var(--ink);
+        font-family:Inter,Arial,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    .rj h1,.rj h2,.rj h3,.rj h4{font-family:Barlow,Arial,sans-serif;margin:0;color:var(--navy);line-height:1.15;}
+    .wrap{max-width:1280px;margin:0 auto;padding:0 28px;}
+    .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--red);}
+
+    /* buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;
+         font-family:Inter,Arial,sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.07em;
+         text-transform:uppercase;text-decoration:none;padding:12px 20px;border-radius:2px;}
+    .btn-red{background:var(--red);color:#fff;}
+    .btn-red:hover{background:var(--red-dk);}
+    .btn-ghost{background:#fff;color:var(--navy);border:1px solid var(--line-2);}
+    .btn-ghost:hover{border-color:var(--navy);}
+    .tlink{color:var(--red);font-weight:600;font-size:13.5px;text-decoration:none;}
+    .tlink:hover{text-decoration:underline;}
+
+    /* header */
+    .hairline{height:3px;background:var(--red);}
+    .site-head{position:sticky;top:0;z-index:60;background:#fff;box-shadow:0 1px 3px rgba(20,30,60,.08);}
+    .topline{background:var(--navy);color:#c8d2e4;font-size:12px;}
+    .topline .wrap{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding-top:7px;padding-bottom:7px;}
+    .topline a{color:#fff;text-decoration:none;font-weight:600;}
+    .top-right{display:flex;align-items:center;gap:20px;}
+    .locale{display:flex;align-items:center;gap:7px;color:#e4e9f2;}
+    .flag{width:20px;height:13px;border-radius:2px;background:
+          linear-gradient(#17408b,#17408b);display:inline-block;position:relative;overflow:hidden;flex:0 0 20px;}
+    .flag::after{content:"";position:absolute;inset:0;
+          background:radial-gradient(circle at 72% 32%,#fff 0 1.1px,transparent 1.2px),
+                     radial-gradient(circle at 84% 60%,#fff 0 1.1px,transparent 1.2px),
+                     radial-gradient(circle at 62% 72%,#fff 0 1.1px,transparent 1.2px),
+                     radial-gradient(circle at 26% 62%,#fff 0 2px,transparent 2.1px);}
+    .headbar .wrap{display:flex;align-items:center;gap:26px;padding-top:14px;padding-bottom:14px;}
+    .headbar{background:linear-gradient(100deg,#fff 0%,#fff 17%,#e8edf5 38%,#91a4c1 60%,#2C4470 78%,#1B2A4A 100%);}
+    .headbar .icon-btn{color:#fff;}
+    .headbar .icon-btn svg{stroke:#fff;}
+    .head-search{background:rgba(255,255,255,.96);border-color:rgba(255,255,255,.65);}
+    .logo{display:flex;align-items:center;text-decoration:none;flex:0 0 auto;}
+    .logo img{height:40px;width:auto;display:block;}
+    .mainnav{display:flex;align-items:center;gap:24px;}
+    .mainnav a{color:var(--navy);text-decoration:none;font-size:13px;font-weight:700;
+               letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+    .mainnav a:hover{color:var(--red);}
+    .head-search{flex:1;display:flex;align-items:center;max-width:330px;margin-left:auto;
+                 border:1px solid var(--line-2);border-radius:2px;background:#fff;padding:0 12px;}
+    .head-search input{flex:1;border:0;outline:none;padding:10px 0;font:inherit;font-size:13.5px;color:var(--ink);background:transparent;}
+    .icon-btn{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--navy);
+              text-decoration:none;font-size:10.5px;font-weight:600;position:relative;}
+    .icon-btn svg{display:block;}
+    .cart-count{position:absolute;top:-5px;right:-8px;background:var(--red);color:#fff;font-size:9.5px;
+                font-weight:700;min-width:15px;height:15px;border-radius:9px;display:flex;
+                align-items:center;justify-content:center;padding:0 4px;}
+    /* category nav */
+    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;border-bottom:1px solid #d8e0ee;}
+    .catnav .wrap{display:flex;align-items:center;gap:16px;}
+    .catnav .wrap::-webkit-scrollbar{display:none;}
+    .catnav a{display:flex;align-items:center;gap:5px;color:var(--navy);text-decoration:none;
+              font-size:12.5px;font-weight:700;letter-spacing:.055em;text-transform:uppercase;
+              white-space:nowrap;padding:12px 0;border-bottom:2px solid transparent;}
+    .catnav a:hover{color:var(--red);border-bottom-color:var(--red);}
+    .catnav .active{color:var(--red);border-bottom-color:var(--red);}
+    .caret{font-size:9px;opacity:.65;}
+
+    /* hero */
+    .hero{position:relative;overflow:hidden;background:
+          linear-gradient(104deg,#ffffff 0%,#ffffff 46%,#eef1f7 100%);border-bottom:1px solid var(--line);}
+    .hero-art{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:620px;
+              max-width:90%;opacity:.13;pointer-events:none;}
+    .hero .wrap{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:52px;
+                align-items:center;padding-top:56px;padding-bottom:56px;}
+    .hero h1{font-size:50px;font-weight:700;letter-spacing:-.015em;margin:14px 0 0;}
+    .hero h1 .l1{display:block;}
+    .hero h1 .alt{color:var(--red);display:block;}
+    .lede{color:var(--muted);font-size:16px;margin:18px 0 0;max-width:46ch;}
+    .herosearch{display:flex;margin-top:26px;max-width:540px;border:1px solid var(--line-2);
+                border-radius:2px;overflow:hidden;background:#fff;}
+    .herosearch input{flex:1;border:0;outline:none;padding:15px 16px;font:inherit;font-size:14.5px;}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:16px;
+           font-size:12.5px;color:var(--muted);}
+    .chip{border:1px solid var(--line-2);border-radius:18px;padding:5px 13px;font-size:12.5px;
+          color:var(--navy);background:#fff;text-decoration:none;}
+    .chip:hover{border-color:var(--red);color:var(--red);}
+    .hero-cards{display:flex;flex-direction:column;gap:16px;}
+    .pcard{background:#fff;border:1px solid var(--line);border-radius:3px;padding:22px 24px;
+           box-shadow:0 1px 2px rgba(20,30,60,.04);}
+    .pcard h3{font-size:21px;font-weight:700;margin:9px 0 10px;}
+    .pcard p{color:var(--muted);font-size:13.5px;margin:0 0 16px;}
+
+    /* sections */
+    .sec{padding:64px 0;}
+    .sec-soft{background:var(--soft);}
+    .sechead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+             flex-wrap:wrap;margin-bottom:28px;}
+    .sechead h2{font-size:34px;font-weight:700;}
+    .sechead p{color:var(--muted);font-size:14.5px;margin:7px 0 0;}
+
+    /* manufacturers */
+    .mfstrip{background:linear-gradient(100deg,#f7f8fa,#eef1f7);border:1px solid var(--line);
+             border-radius:3px;padding:22px 26px;margin-top:44px;}
+    .mfrow{overflow:hidden;margin-top:14px;
+           -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+                   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+    .mftrack{--g:56px;}
+    .mftrack,.mfdup{display:flex;align-items:center;gap:var(--g);}
+    .mftrack{width:max-content;}
+    .mftrack.loop{animation:mfscroll 32s linear infinite;}
+    .mfrow:hover .mftrack.loop{animation-play-state:paused;}
+    @keyframes mfscroll{from{transform:translateX(0);}to{transform:translateX(calc(-50% - var(--g) / 2));}}
+    @media (prefers-reduced-motion:reduce){.mftrack.loop{animation:none;}}
+    .mfrow img{flex:0 0 auto;width:120px;height:36px;object-fit:contain;opacity:.78;filter:grayscale(1);}
+    .mfrow img:hover{opacity:1;filter:none;}
+
+    /* product cards */
+    .prodgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+    .prod{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
+          border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;}
+    .prod:hover{border-color:var(--line-2);box-shadow:0 3px 10px rgba(20,30,60,.07);}
+    .prod-img{height:150px;background:#fff;display:flex;align-items:center;justify-content:center;padding:14px;}
+    .prod-img img{max-width:100%;max-height:100%;object-fit:contain;}
+    .prod-body{border-top:1px solid var(--line);background:var(--soft);padding:14px 16px 16px;
+               display:flex;flex-direction:column;flex:1;gap:7px;}
+    .kicker{font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#8b9099;}
+    .prod h3{font-size:14.5px;font-weight:600;line-height:1.35;min-height:38px;}
+    .avail{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}
+    .prod-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:4px;}
+    .plus{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-size:17px;
+          line-height:1;display:flex;align-items:center;justify-content:center;flex:0 0 30px;}
+
+    /* advice band */
+    .advice{background:var(--panel);border-left:5px solid var(--red);border-radius:2px;
+            padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+    .advice h2{font-size:27px;font-weight:700;margin:8px 0 8px;}
+    .advice p{color:#4a5566;font-size:14px;margin:0;max-width:62ch;}
+    .advice-btns{display:flex;gap:12px;flex-wrap:wrap;}
+
+    /* category tiles */
+    .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .tile{display:block;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+          text-decoration:none;background:#fff;}
+    .tile:hover{box-shadow:0 4px 14px rgba(20,30,60,.1);}
+    .tile-img{height:190px;display:flex;align-items:center;justify-content:center;background:#fff;padding:18px;}
+    .tile-img img{max-width:100%;max-height:100%;object-fit:contain;}
+    .tile-bar{background:var(--red);color:#fff;padding:13px 18px;display:flex;align-items:center;
+              justify-content:space-between;gap:10px;font-family:Barlow,Arial,sans-serif;
+              font-size:17px;font-weight:600;}
+    .tile:hover .tile-bar{background:var(--red-dk);}
+
+    /* why cards */
+    .whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .why{background:#fff;border:1px solid var(--line);border-radius:3px;padding:26px 24px;}
+    .why-h{display:flex;align-items:center;gap:11px;margin-bottom:12px;}
+    .why-h h3{font-size:17.5px;font-weight:700;}
+    .badge{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-size:10px;
+           font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 28px;letter-spacing:.02em;}
+    .why p{color:var(--muted);font-size:13.8px;margin:0;}
+
+    /* footer */
+    .foot{background:var(--navy);color:#c3cde0;}
+    .foot .wrap{padding-top:48px;padding-bottom:34px;}
+    .footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px;}
+    .foot h4{font-family:Inter,Arial,sans-serif;font-size:11.5px;letter-spacing:.12em;
+             text-transform:uppercase;color:#8ea0c0;margin:0 0 15px;font-weight:700;}
+    .foot a{display:block;color:#dbe3f0;text-decoration:none;font-size:13.8px;margin-bottom:10px;}
+    .foot a:hover{color:#fff;text-decoration:underline;}
+    .footmark{font-family:Barlow,Arial,sans-serif;font-size:25px;font-weight:700;color:#fff;letter-spacing:.02em;}
+    .footmark img{height:38px;width:auto;display:block;}
+    .foot-note{font-size:13.5px;color:#9fb0cc;margin:12px 0 18px;max-width:34ch;}
+    .footbar{border-top:1px solid #2c3d61;}
+    .footbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;
+                   flex-wrap:wrap;padding-top:16px;padding-bottom:22px;font-size:12px;color:#8ea0c0;}
+
+    /* mega menu */
+    .catnav .wrap{flex-wrap:nowrap;justify-content:space-between;gap:10px;overflow:visible;}
+    .catmenu{position:relative;}
+    .catmenu>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;
+      color:var(--navy);font-size:12px;font-weight:700;letter-spacing:.02em;
+      text-transform:uppercase;white-space:nowrap;padding:12px 0;border-bottom:2px solid transparent;}
+    .catmenu>summary::-webkit-details-marker{display:none;}
+    .catmenu>summary:hover{color:var(--red);}
+    .catmenu[open]>summary{color:var(--red);border-bottom-color:var(--red);}
+    .catmenu.current>summary{color:var(--red);border-bottom-color:var(--red);}
+    .family-panel{position:absolute;top:100%;left:-14px;min-width:238px;background:#fff;
+      border:1px solid var(--line-2);box-shadow:0 16px 28px rgba(20,30,60,.15);
+      padding:10px 6px;z-index:70;}
+    .family-panel a{display:block;padding:8px 14px;font-size:12px;font-weight:600;
+      letter-spacing:.04em;text-transform:uppercase;color:#535860;text-decoration:none;white-space:nowrap;}
+    .family-panel a:hover{color:var(--red);background:var(--soft);}
+    .catnav .catmenu:last-of-type .family-panel{left:auto;right:-14px;}
+    .catmenu.all{position:static;}
+    .mega-panel{position:absolute;left:0;right:0;top:100%;background:#fff;
+      border-top:1px solid var(--line-2);box-shadow:0 20px 32px rgba(20,30,60,.17);
+      padding:26px 0 24px;z-index:70;max-height:72vh;overflow-y:auto;}
+    .mega-panel>*{max-width:1280px;margin-left:auto;margin-right:auto;padding-left:28px;padding-right:28px;}
+    .mega-intro{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+      padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line);}
+    .mega-intro strong{font-family:Barlow,Arial,sans-serif;font-size:19px;color:var(--navy);}
+    .mega-intro span{font-size:13px;color:var(--muted);}
+    .mega-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 26px;}
+    .mega-columns h3{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--navy);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--line);}
+    .mega-columns a{display:block;padding:5px 0;font-size:13px;color:#535860;text-decoration:none;}
+    .mega-columns a:hover{color:var(--red);text-decoration:underline;}
+    .mega-foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);
+      font-size:12px;color:#8b9099;}
+    .navdrop{position:relative;}
+    .navdrop>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;
+      color:var(--navy);font-size:13px;font-weight:700;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap;}
+    .navdrop>summary::-webkit-details-marker{display:none;}
+    .navdrop>summary:hover,.navdrop[open]>summary{color:var(--red);}
+    .navdrop .drop{position:absolute;top:calc(100% + 12px);left:-14px;min-width:216px;background:#fff;
+      border:1px solid var(--line-2);box-shadow:0 16px 28px rgba(20,30,60,.15);padding:10px 6px;z-index:70;}
+    .navdrop .drop a{display:block;padding:7px 14px;font-size:13px;color:#535860;
+      text-decoration:none;text-transform:none;letter-spacing:0;font-weight:500;}
+    .navdrop .drop a:hover{color:var(--red);background:var(--soft);}
+    .navdrop .drop .sep{margin:6px 8px;border-top:1px solid var(--line);}
+
+    @media (max-width:1180px){ .catnav .catmenu:not(.all){display:none;} }
+    @media (max-width:1080px){
+      .mega-columns{grid-template-columns:repeat(3,1fr);}
+      .hero h1{font-size:42px;}
+      .prodgrid{grid-template-columns:repeat(2,1fr);}
+      .head-search{max-width:220px;}
+      .mainnav{display:none;}
+    }
+    @media (max-width:880px){
+      .wrap{padding:0 20px;}
+      .mega-panel>*{padding-left:20px;padding-right:20px;}
+      .mega-columns{grid-template-columns:repeat(2,1fr);}
+      .hero .wrap{grid-template-columns:1fr;gap:34px;padding-top:40px;padding-bottom:40px;}
+      .hero h1{font-size:36px;max-width:none;}
+      .hero-art{opacity:.09;}
+      .tiles{grid-template-columns:repeat(2,1fr);}
+      .whygrid{grid-template-columns:1fr;}
+      .footgrid{grid-template-columns:1fr 1fr;gap:26px;}
+      .sec{padding:46px 0;}
+      .sechead h2{font-size:28px;}
+    }
+    @media (max-width:640px){
+      .wrap{padding:0 16px;}
+      .mega-panel>*{padding-left:16px;padding-right:16px;}
+      .mega-columns{grid-template-columns:1fr;}
+      .mega-panel{padding:20px 0;}
+      .headbar .wrap{gap:12px;padding-top:11px;padding-bottom:11px;}
+      .logo img{height:32px;}
+      .head-search{display:none;}
+      .headbar{background:linear-gradient(100deg,#fff 0%,#fff 30%,#91a4c1 62%,#1B2A4A 100%);}
+      .icon-label{display:none;}
+      .btn{padding:10px 14px;font-size:11.5px;}
+      .hero h1{font-size:29px;}
+      .lede{font-size:15px;}
+      .prodgrid{grid-template-columns:repeat(2,1fr);}
+      .mftrack{--g:40px;}
+      .mfrow img{width:100px;}
+      .tiles{grid-template-columns:1fr;}
+      .tile-img{height:170px;}
+      .footgrid{grid-template-columns:1fr;gap:24px;}
+      .advice{padding:24px 20px;}
+      .advice h2{font-size:23px;}
+      .sec{padding:38px 0;}
+      .sechead h2{font-size:25px;}
+    }
+  
+</style>
+</helmet>
+
+
+<div class="rj">
+
+  <div class="hairline"></div>
+
+  <div class="topline">
+    <div class="wrap">
+      <span class="top-right">
+        <a href="tel:+61298291555">+61 2 9829 1555</a>
+        <span class="locale"><span class="flag"></span>Australia <span class="caret">&#9660;</span></span>
+        <span class="locale">AUD <span class="caret">&#9660;</span></span>
+      </span>
+    </div>
+  </div>
+
+  <header class="site-head">
+    <div class="headbar">
+      <div class="wrap">
+        <a class="logo" href="Main.dc.html"><img src="/_blob/0dd5b61fc6ec6dd7ea94adf1413a7cdb" alt="Rojone Pty Ltd"></a>
+        <nav class="mainnav">
+          <a href="Main.dc.html">Home</a>
+          <a href="#about">About us</a>
+        <details class="navdrop">
+          <summary>Manufacturers <span class="caret">&#9660;</span></summary>
+          <div class="drop"><a href="Category.dc.html">Amphenol</a><a href="Category.dc.html">Astro Tool</a><a href="Category.dc.html">Cooper Antennas</a><a href="Category.dc.html">Fairview Microwave</a><a href="Category.dc.html">Fischer Connectors</a><a href="Category.dc.html">Freelin-Wade</a><a href="Category.dc.html">L-com</a><a href="Category.dc.html">MilesTek</a><a href="Category.dc.html">Pasternack</a><a href="Category.dc.html">Radiall</a><a href="Category.dc.html">RFS</a><a href="Category.dc.html">Spinner</a><a href="Category.dc.html">Times Microwave</a><div class="sep"></div><a href="Main.dc.html#manufacturers">All manufacturers &rarr;</a></div>
+        </details>
+        </nav>
+        <label class="head-search">
+          <input type="search" placeholder="Search products..." aria-label="Search products">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        </label>
+        <a class="icon-btn" href="#account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.4-3.8 4.2-5.6 7.5-5.6s6.1 1.8 7.5 5.6"/></svg>
+          <span class="icon-label">Account</span>
+        </a>
+        <a class="icon-btn" href="#cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><path d="M3 4h2.2l2.3 10.4h9.6L19.5 7H6.2"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
+          <span class="cart-count">0</span>
+          <span class="icon-label">Cart</span>
+        </a>
+        <a class="btn btn-red" href="#contact">Contact us</a>
+      </div>
+    </div>
+
+    <nav class="catnav">
+      <div class="wrap">
+        <details class="catmenu all" name="catnav">
+          <summary>&#9776; All products <span class="caret">&#9660;</span></summary>
+          <div class="mega-panel">
+            <div class="mega-intro"><strong>Explore our products</strong><span>Browse by product family</span></div>
+            <div class="mega-columns">
+          <div><h3>Antennas</h3><a href="Category.dc.html">Antenna Accessories</a><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">RF Antennas</a></div>
+          <div><h3>Cable Assemblies</h3><a href="Category.dc.html">Coaxial Cable Assemblies</a><a href="Category.dc.html">Custom Cable Assemblies</a><a href="Category.dc.html">Semi-Rigid Assemblies</a></div>
+          <div><h3>Components &amp; Tools</h3><a href="Category.dc.html">Calibration &amp; Test Kits</a><a href="Category.dc.html">RF Components</a><a href="Category.dc.html">Tooling &amp; Accessories</a></div>
+          <div><h3>Fibre Optics</h3><a href="Category.dc.html">Fibre Patch Leads</a><a href="Category.dc.html">Optical Components</a><a href="Category.dc.html">RF over Fibre</a></div>
+          <div><h3>GPS Products</h3><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">Repeaters &amp; Splitters</a></div>
+          <div><h3>Headsets</h3><a href="Category.dc.html">Headsets &amp; Interconnect</a></div>
+          <div><h3>RF Connectors &amp; Adaptors</h3><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
+            </div>
+            <div class="mega-foot">Example category structure &middot; final catalogue to be confirmed.</div>
+          </div>
+        </details>
+        <details class="catmenu current" name="catnav">
+          <summary>RF Connectors &amp; Adaptors <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Cable Assemblies <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Coaxial Cable Assemblies</a><a href="Category.dc.html">Custom Cable Assemblies</a><a href="Category.dc.html">Semi-Rigid Assemblies</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Fibre Optics <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Fibre Patch Leads</a><a href="Category.dc.html">Optical Components</a><a href="Category.dc.html">RF over Fibre</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>GPS Products <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">Repeaters &amp; Splitters</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Antennas <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Antenna Accessories</a><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">RF Antennas</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Components &amp; Tools <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Calibration &amp; Test Kits</a><a href="Category.dc.html">RF Components</a><a href="Category.dc.html">Tooling &amp; Accessories</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Headsets <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Headsets &amp; Interconnect</a></div>
+        </details>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <img class="hero-art" src="/_blob/7381e0c42606bcc2b1b39a05a652d33d" alt="">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Australian owned &amp; operated</div>
+        <h1><span class="l1">RF, Microwave &amp; Fibre</span><span class="alt">Components &amp; Assemblies</span></h1>
+        <p class="lede">Quality connectors, cable assemblies, antennas and RF components, in stock and ready to quote. Australian-made cable assemblies available.</p>
+        <div class="herosearch">
+          <input type="search" placeholder="Search by part number or keyword..." aria-label="Search the catalogue">
+          <button class="btn btn-red" type="button">Search &rarr;</button>
+        </div>
+        <div class="chips">
+          <span>Popular searches:</span>
+          <a class="chip" href="Category.dc.html">SMA</a>
+          <a class="chip" href="Category.dc.html">N-Type</a>
+          <a class="chip" href="Category.dc.html">LMR-400</a>
+          <a class="chip" href="#gps">GPS antennas</a>
+          <a class="chip" href="#fibre">Fibre patch leads</a>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="pcard">
+          <div class="eyebrow">Applications support</div>
+          <h3>Not sure which connector or cable you need?</h3>
+          <p>Talk to our technical team about your application: cable loss on long runs, connector selection, high-frequency pins, phase matching, and flexible vs semi-rigid cables.</p>
+          <a class="btn btn-red" href="#expert">Ask a technical expert</a>
+        </div>
+        <div class="pcard">
+          <div class="eyebrow">Build to print</div>
+          <h3>Non-standard length or a custom pairing? We'll build it.</h3>
+          <p>One-off builds and small production runs, made to your drawing and tested before dispatch.</p>
+          <a class="btn btn-red" href="#build">Discuss your build</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="mfstrip" id="manufacturers">
+      <div class="eyebrow">Manufacturers</div>
+      <div class="mfrow">
+        <div class="mftrack">
+          <img src="/_blob/fb360c93b8dddccfb8021954572fe7c0" alt="Cooper Antennas">
+          <img src="/_blob/17745e5738e519119cb82287a6f7c10c" alt="RFS">
+          <img src="/_blob/d3d0126217c3f3123b4ddcd79aa2e837" alt="Spinner">
+          <img src="/_blob/e85c65ce5abd6356b1a54ad9df77956b" alt="Astro Tool">
+          <img src="/_blob/de1a8b63580f8faaa33f230c2054b738" alt="Radiall">
+          <img src="/_blob/5f789481086a534eebd31ae86bc9c1a1" alt="MilesTek">
+          <img src="/_blob/e4035b24c0fd5ece7f534445d9d138bb" alt="Freelin-Wade">
+          <img src="/_blob/c2d9f26283782dbf98fdd9768801ebbe" alt="Fairview Microwave">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sechead">
+        <div>
+          <h2>Popular Products</h2>
+          <p>A closer look at our product range.</p>
+        </div>
+        <a class="tlink" href="Category.dc.html">View all products &#8599;</a>
+      </div>
+      <div class="prodgrid">
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/1c1e6ba23a292293bd6d8f446b8fa018" alt="Hand-held quick fold Yagi array"></div>
+          <div class="prod-body">
+            <div class="kicker">Antennas</div>
+            <h3>Hand-held Quick Fold Yagi Array</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/07b027613654fde6d9d941a07686edc2" alt="Pigtail MMT right angle female cable"></div>
+          <div class="prod-body">
+            <div class="kicker">Cable assemblies</div>
+            <h3>Pigtail MMT Right Angle Female Cable 2.6 50s 20cm</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/6741160be63b00aaa750d3c2c345fc5c" alt="Size 1 socket coaxial contact"></div>
+          <div class="prod-body">
+            <div class="kicker">Connectors</div>
+            <h3>Size 1 Socket Coaxial Contact</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/29747c48705d1ca79db8e5ad83a893dd" alt="SSMC straight jack male gold"></div>
+          <div class="prod-body">
+            <div class="kicker">Connectors</div>
+            <h3>SSMC Straight Jack Male, Gold</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/5ea84b30af13255f8769a164956cc1bb" alt="615179 positioner SK2/2"></div>
+          <div class="prod-body">
+            <div class="kicker">Tooling</div>
+            <h3>615179 Positioner SK2/2</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/53df0f7739bbf4b12429cc23fb408aa8" alt="Magnetic mount whip antenna"></div>
+          <div class="prod-body">
+            <div class="kicker">Antennas</div>
+            <h3>Magnetic Mount Whip Antenna</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/22b06095f2ee744bc9d1ea2ccbd442c4" alt="SMA male to SMA female adaptor, gold"></div>
+          <div class="prod-body">
+            <div class="kicker">Adaptors</div>
+            <h3>SMA Male to SMA Female Adaptor, Gold</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/cc042e7240677fe1cd333e7600261cc6" alt="Coaxial cable assembly"></div>
+          <div class="prod-body">
+            <div class="kicker">Cable assemblies</div>
+            <h3>Coaxial Cable Assembly, Male to Male</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/d3b3d952f074233590e7f768b16cf9d6" alt="LC to LC duplex fibre patch lead"></div>
+          <div class="prod-body">
+            <div class="kicker">Fibre optics</div>
+            <h3>LC to LC Duplex Fibre Patch Lead</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+        <a class="prod" href="Category.dc.html">
+          <div class="prod-img"><img src="/_blob/75aa6d14d891bc9e13d8fd2fe81fc2c9" alt="Ratchet crimp tool"></div>
+          <div class="prod-body">
+            <div class="kicker">Tooling</div>
+            <h3>Ratchet Crimp Tool</h3>
+            <div class="avail">Contact us for availability</div>
+            <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="advice">
+      <div>
+        <div class="eyebrow">Application support</div>
+        <h2>The right advice. The right component.</h2>
+        <p>A trusted partner to leading organisations, supporting engineering and procurement teams. Need help choosing a connector or cable? Talk to our team about your application.</p>
+      </div>
+      <div class="advice-btns">
+        <a class="btn btn-red" href="mailto:sales@rojone.com.au">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2.5" y="5" width="19" height="14" rx="1.6"/><path d="M3 6.5l9 6 9-6"/></svg>
+          Email us</a>
+        <a class="btn btn-red" href="tel:+61298291555">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 3.5h3.4l1.7 4.3-2.1 1.6a12.5 12.5 0 006.6 6.6l1.6-2.1 4.3 1.7V19a1.8 1.8 0 01-2 1.8A16.4 16.4 0 013.2 5.5 1.8 1.8 0 015 3.5z"/></svg>
+          Call us</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec sec-soft">
+    <div class="wrap">
+      <div class="sechead">
+        <div>
+          <h2>Shop by category</h2>
+          <p>A direct route to the components you need.</p>
+        </div>
+        <a class="tlink" href="Category.dc.html">Explore all categories &#8599;</a>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="#antennas">
+          <div class="tile-img"><img src="/_blob/c95cbfd6fe8726a2c01a89fd45b8d8af" alt="Antennas"></div>
+          <div class="tile-bar">Antennas <span>&#8599;</span></div>
+        </a>
+        <a class="tile" href="Category.dc.html">
+          <div class="tile-img"><img src="/_blob/ecc89a2249b2c08b5b763f3bf0621295" alt="Adaptors"></div>
+          <div class="tile-bar">Adaptors <span>&#8599;</span></div>
+        </a>
+        <a class="tile" href="#cable">
+          <div class="tile-img"><img src="/_blob/d5ffee3d587c5dd4d94a0f2cbbe9caa3" alt="Cable assemblies"></div>
+          <div class="tile-bar">Cable Assemblies <span>&#8599;</span></div>
+        </a>
+        <a class="tile" href="#gps">
+          <div class="tile-img"><img src="/_blob/4cb05d0217064e5c58069ae47622f1ba" alt="GPS products"></div>
+          <div class="tile-bar">GPS Products <span>&#8599;</span></div>
+        </a>
+        <a class="tile" href="#fibre">
+          <div class="tile-img"><img src="/_blob/c3827a4f6f418ccbc18bdcab9d4ceb73" alt="Fibre optic"></div>
+          <div class="tile-bar">Fibre Optic <span>&#8599;</span></div>
+        </a>
+        <a class="tile" href="#tooling">
+          <div class="tile-img"><img src="/_blob/94fc406e6a0f4121bc5c968e0fdab58f" alt="Tooling"></div>
+          <div class="tile-bar">Tooling <span>&#8599;</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="sechead">
+        <div>
+          <h2>Why Rojone, not a generic global catalogue</h2>
+          <p>Large distributors sell parts. We sell the right part, backed by people who understand RF.</p>
+        </div>
+      </div>
+      <div class="whygrid">
+        <div class="why">
+          <div class="why-h"><span class="badge">AU</span><h3>Australian owned since 1978</h3></div>
+          <p>Your local partner, with over 48 years of experience in stockholding, supply and manufacturing know-how.</p>
+        </div>
+        <div class="why">
+          <div class="why-h">
+            <span class="badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2.8l8 4.2v10L12 21.2 4 17V7z"/><path d="M4 7l8 4.2L20 7"/><path d="M12 11.2V21"/></svg></span>
+            <h3>Custom-built solutions &amp; kits</h3>
+          </div>
+          <p>Non-standard cable length, an unusual connector pairing, a small production run: we build to your spec, not just off the shelf.</p>
+        </div>
+        <div class="why">
+          <div class="why-h">
+            <span class="badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><circle cx="12" cy="12" r="8.6"/><path d="M8.2 12.3l2.7 2.7 5-5.3"/></svg></span>
+            <h3>Quality you can trace</h3>
+          </div>
+          <p>Backed by ISO 9001 certification, IPC-certified technicians, certificates of conformity and full traceability of every component.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="footgrid">
+        <div>
+          <div class="footmark"><img src="/_blob/bad678488f8685c65015f48d6c476ef6" alt="Rojone Pty Ltd"></div>
+          <p class="foot-note">RF, microwave and fibre optic components, assemblies and custom builds. Australian owned and manufacturing since 1978.</p>
+          <a href="tel:+61298291555">+61 2 9829 1555</a>
+          <a href="mailto:sales@rojone.com.au">sales@rojone.com.au &#8599;</a>
+          <a href="#contact">Ingleburn, NSW, Australia</a>
+        </div>
+        <div>
+          <h4>Shop by category</h4>
+          <a href="Category.dc.html">RF Connectors &amp; Adaptors</a>
+          <a href="#cable">Cable Assemblies</a>
+          <a href="#antennas">Antennas</a>
+          <a href="#fibre">Fibre Optics</a>
+          <a href="#gps">GPS Products</a>
+        </div>
+        <div>
+          <h4>Technical resources</h4>
+          <a href="#datasheets">Datasheet library</a>
+          <a href="#crossref">Connector cross-reference</a>
+          <a href="#notes">Application notes</a>
+          <a href="#expert">Request technical support</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#about">About Rojone</a>
+          <a href="#quote">Request a quote</a>
+          <a href="#returns">Returns &amp; warranty</a>
+          <a href="#contact">Contact us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footbar">
+      <div class="wrap">
+        <span>&copy; 2026 Rojone Pty Ltd &middot; ISO 9001 certified &middot; AUD pricing &middot; Design concept, not a live storefront.</span>
+        <span>Privacy &middot; Terms</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+  <script>
+    document.querySelectorAll('.mftrack').forEach(function(t){
+      var d=document.createElement('span');d.className='mfdup';d.setAttribute('aria-hidden','true');
+      t.querySelectorAll(':scope > img').forEach(function(i){var c=i.cloneNode();c.alt='';d.appendChild(c);});
+      t.appendChild(d);t.classList.add('loop');
+    });
+  </script>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
