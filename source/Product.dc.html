@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    :root{
+      --red:#ac0000; --red-dk:#8d0000; --navy:#1b2a4a; --ink:#202329;
+      --muted:#62666e; --line:#e6e7e9; --line-2:#d9dadd;
+      --panel:#e8edf5; --soft:#f6f7f8; --green:#167a3c; --amber:#a86400;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;}
+    .rj{width:100%;background:#fff;color:var(--ink);
+        font-family:Inter,Arial,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    .rj h1,.rj h2,.rj h3,.rj h4{font-family:Barlow,Arial,sans-serif;margin:0;color:var(--navy);line-height:1.15;}
+    .wrap{max-width:1280px;margin:0 auto;padding:0 28px;}
+    .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--red);}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;
+         font-family:Inter,Arial,sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.07em;
+         text-transform:uppercase;text-decoration:none;padding:12px 20px;border-radius:2px;}
+    .btn-red{background:var(--red);color:#fff;}
+    .btn-red:hover{background:var(--red-dk);}
+    .btn-ghost{background:#fff;color:var(--navy);border:1px solid var(--line-2);}
+    .btn-ghost:hover{border-color:var(--navy);}
+    .btn-sm{padding:9px 14px;font-size:11.5px;}
+    .tlink{color:var(--red);font-weight:600;font-size:13.5px;text-decoration:none;}
+    .tlink:hover{text-decoration:underline;}
+
+    /* header (shared with homepage) */
+    .hairline{height:3px;background:var(--red);}
+    .site-head{position:sticky;top:0;z-index:60;background:#fff;box-shadow:0 1px 3px rgba(20,30,60,.08);}
+    .topline{background:var(--navy);color:#c8d2e4;font-size:12px;}
+    .topline .wrap{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding-top:7px;padding-bottom:7px;}
+    .topline a{color:#fff;text-decoration:none;font-weight:600;}
+    .top-right{display:flex;align-items:center;gap:20px;}
+    .locale{display:flex;align-items:center;gap:7px;color:#e4e9f2;}
+    .flag{width:20px;height:13px;border-radius:2px;background:#17408b;display:inline-block;
+          position:relative;overflow:hidden;flex:0 0 20px;}
+    .flag::after{content:"";position:absolute;inset:0;
+          background:radial-gradient(circle at 72% 32%,#fff 0 1.1px,transparent 1.2px),
+                     radial-gradient(circle at 84% 60%,#fff 0 1.1px,transparent 1.2px),
+                     radial-gradient(circle at 62% 72%,#fff 0 1.1px,transparent 1.2px),
+                     radial-gradient(circle at 26% 62%,#fff 0 2px,transparent 2.1px);}
+    .headbar .wrap{display:flex;align-items:center;gap:26px;padding-top:14px;padding-bottom:14px;}
+    .headbar{background:linear-gradient(100deg,#fff 0%,#fff 17%,#e8edf5 38%,#91a4c1 60%,#2C4470 78%,#1B2A4A 100%);}
+    .headbar .icon-btn{color:#fff;}
+    .headbar .icon-btn svg{stroke:#fff;}
+    .head-search{background:rgba(255,255,255,.96);border-color:rgba(255,255,255,.65);}
+    .logo{display:flex;align-items:center;text-decoration:none;flex:0 0 auto;}
+    .logo img{height:40px;width:auto;display:block;}
+    .mainnav{display:flex;align-items:center;gap:24px;}
+    .mainnav a{color:var(--navy);text-decoration:none;font-size:13px;font-weight:700;
+               letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+    .mainnav a:hover{color:var(--red);}
+    .head-search{flex:1;display:flex;align-items:center;max-width:330px;margin-left:auto;
+                 border:1px solid var(--line-2);border-radius:2px;background:#fff;padding:0 12px;}
+    .head-search input{flex:1;border:0;outline:none;padding:10px 0;font:inherit;font-size:13.5px;color:var(--ink);background:transparent;}
+    .icon-btn{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--navy);
+              text-decoration:none;font-size:10.5px;font-weight:600;position:relative;}
+    .cart-count{position:absolute;top:-5px;right:-8px;background:var(--red);color:#fff;font-size:9.5px;
+                font-weight:700;min-width:15px;height:15px;border-radius:9px;display:flex;
+                align-items:center;justify-content:center;padding:0 4px;}
+    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;border-bottom:1px solid #d8e0ee;}
+    .catnav .wrap{display:flex;align-items:center;gap:16px;}
+    .catnav .wrap::-webkit-scrollbar{display:none;}
+    .catnav a{display:flex;align-items:center;gap:5px;color:var(--navy);text-decoration:none;
+              font-size:12.5px;font-weight:700;letter-spacing:.055em;text-transform:uppercase;
+              white-space:nowrap;padding:12px 0;border-bottom:2px solid transparent;}
+    .catnav a:hover{color:var(--red);border-bottom-color:var(--red);}
+    .catnav .active{color:var(--red);border-bottom-color:var(--red);}
+    .caret{font-size:9px;opacity:.65;}
+
+    /* breadcrumb + banner */
+    .crumb{padding:16px 0 14px;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:#8b9099;}
+    .crumb a{color:var(--red);text-decoration:none;font-weight:700;}
+    .crumb a:hover{text-decoration:underline;}
+    .banner{position:relative;overflow:hidden;background:linear-gradient(100deg,#eef1f7,#e3e9f3);
+            border-left:5px solid var(--red);border-radius:2px;display:grid;
+            grid-template-columns:1.25fr .75fr;gap:24px;align-items:center;padding:34px 38px;}
+    .banner h1{font-size:40px;font-weight:700;margin:10px 0 10px;letter-spacing:-.01em;}
+    .banner p{color:#4a5566;font-size:14.5px;margin:0;max-width:56ch;}
+    .banner-art{display:flex;justify-content:flex-end;}
+    .banner-art img{max-width:100%;max-height:150px;object-fit:contain;}
+
+    /* search row */
+    .catsearch{display:flex;margin:26px 0 28px;border:1px solid var(--line-2);border-radius:2px;overflow:hidden;background:#fff;}
+    .catsearch input{flex:1;border:0;outline:none;padding:14px 16px;font:inherit;font-size:14.5px;}
+
+    /* layout */
+    .layout{display:grid;grid-template-columns:238px 1fr;gap:34px;padding-bottom:64px;}
+    .filters{border:1px solid var(--line);border-radius:3px;padding:20px;align-self:start;background:#fff;}
+    .filters-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+    .filters-top h2{font-size:16px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+    .fgroup{margin-bottom:20px;}
+    .fgroup h3{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+               color:var(--navy);padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:10px;}
+    .frow{display:flex;align-items:center;gap:9px;font-size:13.5px;color:#3d4450;padding:5px 0;cursor:pointer;}
+    .frow input{width:15px;height:15px;accent-color:var(--red);margin:0;}
+
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;
+             flex-wrap:wrap;margin-bottom:18px;}
+    .count{font-size:13.5px;color:var(--muted);}
+    .count b{color:var(--navy);}
+    .tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .sortlab{font-size:13px;color:var(--muted);}
+    .sortsel{font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line-2);
+             border-radius:2px;background:#fff;color:var(--navy);}
+
+    /* catalogue cards */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    .card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:3px;
+          overflow:hidden;background:#fff;}
+    .card:hover{box-shadow:0 4px 14px rgba(20,30,60,.09);}
+    .card-img{height:172px;display:flex;align-items:center;justify-content:center;padding:18px;background:#fff;}
+    .card-img img{max-width:100%;max-height:100%;object-fit:contain;}
+    .card-body{background:var(--soft);border-top:1px solid var(--line);padding:16px 18px 18px;
+               display:flex;flex-direction:column;flex:1;gap:7px;}
+    .sku{font-size:11.5px;color:#8b9099;letter-spacing:.04em;}
+    .card h3{font-size:16px;font-weight:600;line-height:1.3;min-height:42px;}
+    .spec{font-size:12.5px;color:var(--muted);}
+    .avail{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}
+    .avail.back{color:var(--amber);}
+    .price{font-family:Barlow,Arial,sans-serif;font-size:25px;font-weight:700;color:var(--navy);
+           display:flex;align-items:baseline;gap:6px;}
+    .price span{font-family:Inter,Arial,sans-serif;font-size:11.5px;font-weight:600;color:var(--muted);}
+    .cardacts{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px;}
+    .ds{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+        color:var(--red);text-decoration:underline;margin-top:4px;}
+    .footnote{font-size:12.5px;color:#8b9099;margin-top:22px;}
+
+    /* footer */
+    .foot{background:var(--navy);color:#c3cde0;}
+    .foot .wrap{padding-top:48px;padding-bottom:34px;}
+    .footgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px;}
+    .foot h4{font-family:Inter,Arial,sans-serif;font-size:11.5px;letter-spacing:.12em;
+             text-transform:uppercase;color:#8ea0c0;margin:0 0 15px;font-weight:700;}
+    .foot a{display:block;color:#dbe3f0;text-decoration:none;font-size:13.8px;margin-bottom:10px;}
+    .foot a:hover{color:#fff;text-decoration:underline;}
+    .footmark{font-family:Barlow,Arial,sans-serif;font-size:25px;font-weight:700;color:#fff;letter-spacing:.02em;}
+    .footmark img{height:38px;width:auto;display:block;}
+    .foot-note{font-size:13.5px;color:#9fb0cc;margin:12px 0 18px;max-width:34ch;}
+    .footbar{border-top:1px solid #2c3d61;}
+    .footbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;
+                   flex-wrap:wrap;padding-top:16px;padding-bottom:22px;font-size:12px;color:#8ea0c0;}
+
+    /* mega menu */
+    .catnav .wrap{flex-wrap:nowrap;justify-content:space-between;gap:10px;overflow:visible;}
+    .catmenu{position:relative;}
+    .catmenu>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;
+      color:var(--navy);font-size:12px;font-weight:700;letter-spacing:.02em;
+      text-transform:uppercase;white-space:nowrap;padding:12px 0;border-bottom:2px solid transparent;}
+    .catmenu>summary::-webkit-details-marker{display:none;}
+    .catmenu>summary:hover{color:var(--red);}
+    .catmenu[open]>summary{color:var(--red);border-bottom-color:var(--red);}
+    .catmenu.current>summary{color:var(--red);border-bottom-color:var(--red);}
+    .family-panel{position:absolute;top:100%;left:-14px;min-width:238px;background:#fff;
+      border:1px solid var(--line-2);box-shadow:0 16px 28px rgba(20,30,60,.15);
+      padding:10px 6px;z-index:70;}
+    .family-panel a{display:block;padding:8px 14px;font-size:12px;font-weight:600;
+      letter-spacing:.04em;text-transform:uppercase;color:#535860;text-decoration:none;white-space:nowrap;}
+    .family-panel a:hover{color:var(--red);background:var(--soft);}
+    .catnav .catmenu:last-of-type .family-panel{left:auto;right:-14px;}
+    .catmenu.all{position:static;}
+    .mega-panel{position:absolute;left:0;right:0;top:100%;background:#fff;
+      border-top:1px solid var(--line-2);box-shadow:0 20px 32px rgba(20,30,60,.17);
+      padding:26px 0 24px;z-index:70;max-height:72vh;overflow-y:auto;}
+    .mega-panel>*{max-width:1280px;margin-left:auto;margin-right:auto;padding-left:28px;padding-right:28px;}
+    .mega-intro{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+      padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line);}
+    .mega-intro strong{font-family:Barlow,Arial,sans-serif;font-size:19px;color:var(--navy);}
+    .mega-intro span{font-size:13px;color:var(--muted);}
+    .mega-columns{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 26px;}
+    .mega-columns h3{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+      color:var(--navy);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--line);}
+    .mega-columns a{display:block;padding:5px 0;font-size:13px;color:#535860;text-decoration:none;}
+    .mega-columns a:hover{color:var(--red);text-decoration:underline;}
+    .mega-foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);
+      font-size:12px;color:#8b9099;}
+    .navdrop{position:relative;}
+    .navdrop>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:5px;
+      color:var(--navy);font-size:13px;font-weight:700;letter-spacing:.08em;
+      text-transform:uppercase;white-space:nowrap;}
+    .navdrop>summary::-webkit-details-marker{display:none;}
+    .navdrop>summary:hover,.navdrop[open]>summary{color:var(--red);}
+    .navdrop .drop{position:absolute;top:calc(100% + 12px);left:-14px;min-width:216px;background:#fff;
+      border:1px solid var(--line-2);box-shadow:0 16px 28px rgba(20,30,60,.15);padding:10px 6px;z-index:70;}
+    .navdrop .drop a{display:block;padding:7px 14px;font-size:13px;color:#535860;
+      text-decoration:none;text-transform:none;letter-spacing:0;font-weight:500;}
+    .navdrop .drop a:hover{color:var(--red);background:var(--soft);}
+    .navdrop .drop .sep{margin:6px 8px;border-top:1px solid var(--line);}
+
+    @media (max-width:1180px){ .catnav .catmenu:not(.all){display:none;} }
+    @media (max-width:1080px){
+      .mega-columns{grid-template-columns:repeat(3,1fr);}
+      .mainnav{display:none;}
+      .head-search{max-width:220px;}
+      .layout{grid-template-columns:210px 1fr;gap:24px;}
+      .cards{grid-template-columns:repeat(2,1fr);}
+      .banner h1{font-size:33px;}
+    }
+    @media (max-width:880px){
+      .wrap{padding:0 20px;}
+      .mega-panel>*{padding-left:20px;padding-right:20px;}
+      .mega-columns{grid-template-columns:repeat(2,1fr);}
+      .layout{grid-template-columns:1fr;gap:24px;}
+      .banner{grid-template-columns:1fr;padding:26px 24px;}
+      .banner-art{display:none;}
+      .footgrid{grid-template-columns:1fr 1fr;gap:26px;}
+    }
+    @media (max-width:640px){
+      .wrap{padding:0 16px;}
+      .mega-panel>*{padding-left:16px;padding-right:16px;}
+      .mega-columns{grid-template-columns:1fr;}
+      .mega-panel{padding:20px 0;}
+      .headbar .wrap{gap:12px;padding-top:11px;padding-bottom:11px;}
+      .logo img{height:32px;}
+      .head-search{display:none;}
+      .headbar{background:linear-gradient(100deg,#fff 0%,#fff 30%,#91a4c1 62%,#1B2A4A 100%);}
+      .headbar .icon-btn{color:var(--navy);}
+      .headbar .icon-btn svg{stroke:var(--navy);}
+      .icon-label{display:none;}
+      .btn{padding:10px 14px;font-size:11.5px;}
+      .banner h1{font-size:27px;}
+      .cards{grid-template-columns:1fr;}
+      .card-img{height:200px;}
+      .footgrid{grid-template-columns:1fr;gap:24px;}
+    }
+  
+    /* product detail */
+    .pdp{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;padding:4px 0 52px;}
+    .gal-main{border:1px solid var(--line);border-radius:3px;background:#fff;height:430px;
+      display:flex;align-items:center;justify-content:center;padding:36px;}
+    .gal-main img{max-width:100%;max-height:100%;object-fit:contain;}
+    .gal-thumbs{display:flex;gap:10px;margin-top:12px;}
+    .gal-thumbs span{width:82px;height:82px;border:1px solid var(--line);border-radius:3px;
+      background:#fff;padding:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+    .gal-thumbs span img{max-width:100%;max-height:100%;object-fit:contain;}
+    .gal-thumbs .on{border-color:var(--red);box-shadow:0 0 0 1px var(--red) inset;}
+    .buy h1{font-size:31px;font-weight:700;margin:8px 0 10px;letter-spacing:-.005em;}
+    .buy .spec{font-size:13.5px;margin-bottom:12px;}
+    .buy-price{display:flex;align-items:baseline;gap:8px;margin:14px 0 4px;}
+    .buy-price b{font-family:Barlow,Arial,sans-serif;font-size:40px;font-weight:700;color:var(--navy);line-height:1;}
+    .buy-price span{font-size:12.5px;font-weight:600;color:var(--muted);}
+    .exgst{font-size:12.5px;color:var(--muted);margin-bottom:18px;}
+    .qtyrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+    .qty{display:flex;align-items:stretch;border:1px solid var(--line-2);border-radius:2px;overflow:hidden;background:#fff;}
+    .qty span{width:38px;display:flex;align-items:center;justify-content:center;color:var(--navy);
+      font-size:17px;background:var(--soft);cursor:pointer;user-select:none;}
+    .qty input{width:58px;border:0;outline:none;text-align:center;font:inherit;font-size:15px;
+      font-weight:600;color:var(--navy);padding:11px 0;}
+    .breaks{width:100%;border-collapse:collapse;font-size:13px;margin:4px 0 0;}
+    .breaks caption{text-align:left;font-size:11.5px;font-weight:700;letter-spacing:.09em;
+      text-transform:uppercase;color:var(--muted);padding-bottom:8px;}
+    .breaks th{text-align:left;font-weight:600;color:var(--navy);}
+    .breaks th,.breaks td{padding:7px 0;border-bottom:1px solid var(--line);}
+    .breaks td{text-align:right;font-weight:600;color:var(--navy);}
+    .breaks tr:last-child th,.breaks tr:last-child td{border-bottom:0;}
+    .meta{list-style:none;padding:18px 0 0;margin:18px 0 0;border-top:1px solid var(--line);
+      font-size:13.2px;color:var(--muted);}
+    .meta li{display:flex;align-items:flex-start;gap:10px;padding:5px 0;}
+    .meta svg{flex:0 0 15px;margin-top:3px;}
+    .pdp-sec{padding:40px 0;border-top:1px solid var(--line);}
+    .pdp-sec h2{font-size:25px;font-weight:700;margin-bottom:6px;}
+    .pdp-sec .lead{color:var(--muted);font-size:14.5px;margin:0 0 22px;}
+    .twocol{display:grid;grid-template-columns:1.08fr .92fr;gap:46px;align-items:start;}
+    .specs{width:100%;border-collapse:collapse;font-size:14px;}
+    .specs th{text-align:left;width:40%;color:var(--navy);font-weight:600;}
+    .specs th,.specs td{padding:11px 2px;border-bottom:1px solid var(--line);vertical-align:top;}
+    .specs td{color:#3d4450;}
+    .prose p{color:#3d4450;font-size:14.2px;margin:0 0 14px;}
+    .docs{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+    .doc{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:3px;
+      padding:13px 15px;text-decoration:none;background:#fff;}
+    .doc:hover{border-color:var(--line-2);box-shadow:0 2px 8px rgba(20,30,60,.06);}
+    .doc b{display:block;font-size:13.5px;color:var(--navy);font-weight:600;}
+    .doc small{display:block;font-size:11.5px;color:var(--muted);}
+    .doc .pill{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.06em;
+      text-transform:uppercase;color:var(--red);}
+    .support{background:var(--panel);border-left:5px solid var(--red);border-radius:2px;
+      padding:26px 30px;display:flex;align-items:center;justify-content:space-between;
+      gap:24px;flex-wrap:wrap;margin-bottom:8px;}
+    .support h3{font-size:22px;font-weight:700;margin:7px 0 6px;}
+    .support p{margin:0;color:#4a5566;font-size:13.8px;max-width:56ch;}
+    .rel{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+    @media (max-width:1080px){
+      .pdp{grid-template-columns:1fr 1fr;gap:30px;}
+      .gal-main{height:360px;}
+      .buy h1{font-size:27px;}
+      .rel{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:880px){
+      .pdp{grid-template-columns:1fr;gap:28px;}
+      .twocol{grid-template-columns:1fr;gap:30px;}
+      .gal-main{height:330px;}
+    }
+    @media (max-width:640px){
+      .gal-main{height:260px;padding:22px;}
+      .gal-thumbs span{width:66px;height:66px;}
+      .buy h1{font-size:23px;}
+      .buy-price b{font-size:33px;}
+      .rel{grid-template-columns:1fr;}
+      .pdp-sec{padding:30px 0;}
+      .support{padding:22px 18px;}
+    }
+</style>
+</helmet>
+
+<div class="rj">
+
+  <div class="hairline"></div>
+
+  <div class="topline">
+    <div class="wrap">
+      <span class="top-right">
+        <a href="tel:+61298291555">+61 2 9829 1555</a>
+        <span class="locale"><span class="flag"></span>Australia <span class="caret">&#9660;</span></span>
+        <span class="locale">AUD <span class="caret">&#9660;</span></span>
+      </span>
+    </div>
+  </div>
+
+  <header class="site-head">
+    <div class="headbar">
+      <div class="wrap">
+        <a class="logo" href="Main.dc.html"><img src="/_blob/0dd5b61fc6ec6dd7ea94adf1413a7cdb" alt="Rojone Pty Ltd"></a>
+        <nav class="mainnav">
+          <a href="Main.dc.html">Home</a>
+          <a href="About.dc.html">About us</a>
+        <details class="navdrop">
+          <summary>Manufacturers <span class="caret">&#9660;</span></summary>
+          <div class="drop"><a href="Manufacturer.dc.html">Amphenol</a><a href="Manufacturer.dc.html">Astro Tool</a><a href="Manufacturer.dc.html">Cooper Antennas</a><a href="Manufacturer.dc.html">Fairview Microwave</a><a href="Manufacturer.dc.html">Fischer Connectors</a><a href="Manufacturer.dc.html">Freelin-Wade</a><a href="Manufacturer.dc.html">L-com</a><a href="Manufacturer.dc.html">MilesTek</a><a href="Manufacturer.dc.html">Pasternack</a><a href="Manufacturer.dc.html">Radiall</a><a href="Manufacturer.dc.html">RFS</a><a href="Manufacturer.dc.html">Spinner</a><a href="Manufacturer.dc.html">Times Microwave</a><div class="sep"></div><a href="Main.dc.html#manufacturers">All manufacturers &rarr;</a></div>
+        </details>
+        </nav>
+        <label class="head-search">
+          <input type="search" placeholder="Search products..." aria-label="Search products">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        </label>
+        <a class="icon-btn" href="#account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.4-3.8 4.2-5.6 7.5-5.6s6.1 1.8 7.5 5.6"/></svg>
+          <span class="icon-label">Account</span>
+        </a>
+        <a class="icon-btn" href="#cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><path d="M3 4h2.2l2.3 10.4h9.6L19.5 7H6.2"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
+          <span class="cart-count">0</span>
+          <span class="icon-label">Cart</span>
+        </a>
+        <a class="btn btn-red" href="#contact">Contact us</a>
+      </div>
+    </div>
+
+    <nav class="catnav">
+      <div class="wrap">
+        <details class="catmenu all" name="catnav">
+          <summary>&#9776; All products <span class="caret">&#9660;</span></summary>
+          <div class="mega-panel">
+            <div class="mega-intro"><strong>Explore our products</strong><span>Browse by product family</span></div>
+            <div class="mega-columns">
+          <div><h3>Antennas</h3><a href="Category.dc.html">Antenna Accessories</a><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">RF Antennas</a></div>
+          <div><h3>Cable Assemblies</h3><a href="Category.dc.html">Coaxial Cable Assemblies</a><a href="Category.dc.html">Custom Cable Assemblies</a><a href="Category.dc.html">Semi-Rigid Assemblies</a></div>
+          <div><h3>Components &amp; Tools</h3><a href="Category.dc.html">Calibration &amp; Test Kits</a><a href="Category.dc.html">RF Components</a><a href="Category.dc.html">Tooling &amp; Accessories</a></div>
+          <div><h3>Fibre Optics</h3><a href="Category.dc.html">Fibre Patch Leads</a><a href="Category.dc.html">Optical Components</a><a href="Category.dc.html">RF over Fibre</a></div>
+          <div><h3>GPS Products</h3><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">Repeaters &amp; Splitters</a></div>
+          <div><h3>Headsets</h3><a href="Category.dc.html">Headsets &amp; Interconnect</a></div>
+          <div><h3>RF Connectors &amp; Adaptors</h3><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
+            </div>
+            <div class="mega-foot">Example category structure &middot; final catalogue to be confirmed.</div>
+          </div>
+        </details>
+        <details class="catmenu current" name="catnav">
+          <summary>RF Connectors &amp; Adaptors <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Cable Assemblies <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Coaxial Cable Assemblies</a><a href="Category.dc.html">Custom Cable Assemblies</a><a href="Category.dc.html">Semi-Rigid Assemblies</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Fibre Optics <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Fibre Patch Leads</a><a href="Category.dc.html">Optical Components</a><a href="Category.dc.html">RF over Fibre</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>GPS Products <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">Repeaters &amp; Splitters</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Antennas <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Antenna Accessories</a><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">RF Antennas</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Components &amp; Tools <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Calibration &amp; Test Kits</a><a href="Category.dc.html">RF Components</a><a href="Category.dc.html">Tooling &amp; Accessories</a></div>
+        </details>
+        <details class="catmenu" name="catnav">
+          <summary>Headsets <span class="caret">&#9660;</span></summary>
+          <div class="family-panel"><a href="Category.dc.html">Headsets &amp; Interconnect</a></div>
+        </details>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="crumb"><a href="Main.dc.html">Home</a> &nbsp;/&nbsp; <a href="Category.dc.html">RF Connectors &amp; Adaptors</a> &nbsp;/&nbsp; SMA Male to N-Type Female Adaptor</div>
+
+    <div class="pdp">
+      <div class="gal">
+        <div class="gal-main"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA male to N-Type female adaptor, 50 ohm"></div>
+        <div class="gal-thumbs">
+          <span class="on"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="Product view 1"></span>
+          <span><img src="/_blob/2f3807a1e642b2501e87d469667d5c85" alt="Product view 2"></span>
+          <span><img src="/_blob/ecc89a2249b2c08b5b763f3bf0621295" alt="Product view 3"></span>
+        </div>
+      </div>
+
+      <div class="buy">
+        <div class="sku">RJ-SMA-1421</div>
+        <h1>SMA Male to N-Type Female Adaptor, 50&#937;</h1>
+        <div class="spec">Rojone &middot; SMA to N-Type &middot; 50&#937; &middot; DC to 11 GHz</div>
+        <div class="avail">In stock &middot; Ingleburn NSW</div>
+
+        <div class="buy-price"><b>$18.40</b> <span>AUD each</span></div>
+        <div class="exgst">Excludes GST and freight. Trade account pricing applies at checkout.</div>
+
+        <div class="qtyrow">
+          <div class="qty"><span>&minus;</span><input type="text" value="1" aria-label="Quantity"><span>+</span></div>
+          <a class="btn btn-red" href="#cart">Add to cart</a>
+          <a class="btn btn-ghost" href="#quote">Add to quote</a>
+        </div>
+
+        <table class="breaks">
+          <caption>Quantity pricing</caption>
+          <tr><th>1 &ndash; 9</th><td>$18.40</td></tr>
+          <tr><th>10 &ndash; 24</th><td>$16.95</td></tr>
+          <tr><th>25 &ndash; 99</th><td>$15.40</td></tr>
+          <tr><th>100 +</th><td>$13.80</td></tr>
+        </table>
+
+        <ul class="meta">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#167a3c" stroke-width="2.2"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
+            Same-day dispatch from Ingleburn on orders placed before 2pm AEST.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2"><path d="M12 3l8 4v5c0 4.4-3.3 8.2-8 9-4.7-.8-8-4.6-8-9V7z"/><path d="M9 12.2l2.1 2.1 4-4.2"/></svg>
+            Certificate of conformity available on request. ISO 9001 certified.</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+            Need a non-standard pairing or length? We build to print.</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="pdp-sec">
+      <div class="twocol">
+        <div>
+          <h2>Specifications</h2>
+          <p class="lead">Electrical and mechanical data for RJ-SMA-1421.</p>
+          <table class="specs">
+            <tr><th>Impedance</th><td>50&#937;</td></tr>
+            <tr><th>Frequency range</th><td>DC to 11 GHz</td></tr>
+            <tr><th>VSWR</th><td>1.25:1 maximum</td></tr>
+            <tr><th>Connector A</th><td>SMA male</td></tr>
+            <tr><th>Connector B</th><td>N-Type female</td></tr>
+            <tr><th>Body material</th><td>Brass, nickel plated</td></tr>
+            <tr><th>Centre contact</th><td>Beryllium copper, gold plated</td></tr>
+            <tr><th>Dielectric</th><td>PTFE</td></tr>
+            <tr><th>Operating temperature</th><td>&minus;65&#176;C to +165&#176;C</td></tr>
+            <tr><th>Compliance</th><td>RoHS compliant</td></tr>
+          </table>
+        </div>
+        <div>
+          <h2>About this adaptor</h2>
+          <p class="lead">Where it fits and what to watch for.</p>
+          <div class="prose">
+            <p>A precision between-series adaptor pairing an SMA male with an N-Type female, used where a test lead or small-diameter assembly has to meet N-Type infrastructure without an additional cable run.</p>
+            <p>Typical applications include antenna and feeder testing, base station and repeater installation, laboratory measurement setups, and GPS repeater distribution where an SMA-terminated lead meets N-Type hardware.</p>
+            <p>The usable frequency range is limited by the N-Type interface rather than the SMA, so DC to 11 GHz applies to the pair. If you need the full SMA range, talk to us about an SMA to SMA solution instead.</p>
+          </div>
+          <h2 style="margin-top:28px;">Documents</h2>
+          <p class="lead">Datasheets and certificates for this part.</p>
+          <div class="docs">
+            <a class="doc" href="#datasheet">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ac0000" stroke-width="1.8"><path d="M14 3H7a1.6 1.6 0 00-1.6 1.6v14.8A1.6 1.6 0 007 21h10a1.6 1.6 0 001.6-1.6V7.6z"/><path d="M14 3v5h5"/></svg>
+              <span><b>Product datasheet</b><small>PDF, 2 pages</small></span><span class="pill">Download &#8599;</span></a>
+            <a class="doc" href="#conformity">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ac0000" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><path d="M8.5 15.5L7 22l5-2.4L17 22l-1.5-6.5"/></svg>
+              <span><b>Certificate of conformity</b><small>Issued per order on request</small></span><span class="pill">Request &#8599;</span></a>
+            <a class="doc" href="#drawing">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ac0000" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
+              <span><b>Mechanical drawing</b><small>PDF and STEP on request</small></span><span class="pill">Request &#8599;</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pdp-sec">
+      <div class="support">
+        <div>
+          <div class="eyebrow">Applications support</div>
+          <h3>Not certain this is the right part?</h3>
+          <p>Send us the interface either side and what you are running, and an applications engineer will confirm the adaptor or specify an assembly instead.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a class="btn btn-red" href="mailto:sales@rojone.com.au">Ask an engineer</a>
+          <a class="btn btn-ghost" href="tel:+61298291555">Call 02 9829 1555</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pdp-sec">
+      <h2>Related products</h2>
+      <p class="lead">Other connectors and adaptors engineers pair with this one.</p>
+      <div class="rel">
+        <a class="card" href="Product.dc.html" style="text-decoration:none;color:inherit;">
+          <div class="card-img"><img src="/_blob/3c7c4442ecf0f073b7438cd12ec219d7" alt="N-Type male straight crimp connector"></div>
+          <div class="card-body">
+            <div class="sku">RJ-NM-2210</div>
+            <h3>N-Type Male Straight Crimp Connector</h3>
+            <div class="spec">Amphenol &middot; N-Type &middot; 50&#937;</div>
+            <div class="avail">In stock</div>
+            <div class="price">$11.90 <span>AUD</span></div>
+          </div>
+        </a>
+        <a class="card" href="Product.dc.html" style="text-decoration:none;color:inherit;">
+          <div class="card-img"><img src="/_blob/e462e1506708aa36bf96d7477e53c71a" alt="BNC female bulkhead"></div>
+          <div class="card-body">
+            <div class="sku">RJ-BNC-0087</div>
+            <h3>BNC Female Bulkhead, 75&#937;</h3>
+            <div class="spec">Radiall &middot; BNC &middot; 75&#937;</div>
+            <div class="avail back">Backorder</div>
+            <div class="price">$9.20 <span>AUD</span></div>
+          </div>
+        </a>
+        <a class="card" href="Product.dc.html" style="text-decoration:none;color:inherit;">
+          <div class="card-img"><img src="/_blob/971724b34ffcbdf4241477bf0117f641" alt="TNC male crimp connector"></div>
+          <div class="card-body">
+            <div class="sku">RJ-TNC-3305</div>
+            <h3>TNC Male Crimp Connector, RG-58</h3>
+            <div class="spec">Rojone &middot; TNC &middot; 50&#937;</div>
+            <div class="avail">In stock</div>
+            <div class="price">$14.60 <span>AUD</span></div>
+          </div>
+        </a>
+        <a class="card" href="Product.dc.html" style="text-decoration:none;color:inherit;">
+          <div class="card-img"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA female to SMA female adaptor"></div>
+          <div class="card-body">
+            <div class="sku">RJ-SMA-1477</div>
+            <h3>SMA Female to SMA Female Adaptor</h3>
+            <div class="spec">Amphenol &middot; SMA &middot; 50&#937;</div>
+            <div class="avail">In stock</div>
+            <div class="price">$16.10 <span>AUD</span></div>
+          </div>
+        </a>
+      </div>
+      <p class="footnote">Design preview &middot; specifications, pricing and quantity breaks are indicative and to be validated against the live catalogue before launch.</p>
+    </section>
+  </main>
+
+<footer class="foot">
+    <div class="wrap">
+      <div class="footgrid">
+        <div>
+          <div class="footmark"><img src="/_blob/bad678488f8685c65015f48d6c476ef6" alt="Rojone Pty Ltd"></div>
+          <p class="foot-note">RF, microwave and fibre optic components, assemblies and custom builds. Australian owned and manufacturing since 1978.</p>
+          <a href="tel:+61298291555">+61 2 9829 1555</a>
+          <a href="mailto:sales@rojone.com.au">sales@rojone.com.au &#8599;</a>
+          <a href="#contact">Ingleburn, NSW, Australia</a>
+        </div>
+        <div>
+          <h4>Shop by category</h4>
+          <a href="Category.dc.html">RF Connectors &amp; Adaptors</a>
+          <a href="Main.dc.html#cable">Cable Assemblies</a>
+          <a href="Main.dc.html#antennas">Antennas</a>
+          <a href="Main.dc.html#fibre">Fibre Optics</a>
+          <a href="Main.dc.html#gps">GPS Products</a>
+        </div>
+        <div>
+          <h4>Technical resources</h4>
+          <a href="#datasheets">Datasheet library</a>
+          <a href="#crossref">Connector cross-reference</a>
+          <a href="#notes">Application notes</a>
+          <a href="#expert">Request technical support</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="About.dc.html">About Rojone</a>
+          <a href="#quote">Request a quote</a>
+          <a href="#returns">Returns &amp; warranty</a>
+          <a href="#contact">Contact us</a>
+        </div>
+      </div>
+    </div>
+    <div class="footbar">
+      <div class="wrap">
+        <span>&copy; 2026 Rojone Pty Ltd &middot; ISO 9001 certified &middot; AUD pricing &middot; Design concept, not a live storefront.</span>
+        <span>Privacy &middot; Terms</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -10,7 +10,6 @@
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
   <style>
-
     :root{
       --red:#ac0000; --red-dk:#8d0000; --navy:#1b2a4a; --ink:#202329;
       --muted:#62666e; --line:#e6e7e9; --line-2:#d9dadd;
@@ -119,7 +118,7 @@
              border-radius:3px;padding:22px 26px;margin-top:44px;}
     .mfrow{overflow:hidden;margin-top:14px;
            -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
-                   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+           mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
     .mftrack{--g:56px;}
     .mftrack,.mfdup{display:flex;align-items:center;gap:var(--g);}
     .mftrack{width:max-content;}
@@ -239,7 +238,7 @@
     @media (max-width:1080px){
       .mega-columns{grid-template-columns:repeat(3,1fr);}
       .hero h1{font-size:42px;}
-      .prodgrid{grid-template-columns:repeat(2,1fr);}
+      .prodgrid{grid-template-columns:repeat(3,1fr);}
       .head-search{max-width:220px;}
       .mainnav{display:none;}
     }
@@ -265,6 +264,8 @@
       .logo img{height:32px;}
       .head-search{display:none;}
       .headbar{background:linear-gradient(100deg,#fff 0%,#fff 30%,#91a4c1 62%,#1B2A4A 100%);}
+      .headbar .icon-btn{color:var(--navy);}
+      .headbar .icon-btn svg{stroke:var(--navy);}
       .icon-label{display:none;}
       .btn{padding:10px 14px;font-size:11.5px;}
       .hero h1{font-size:29px;}
@@ -280,10 +281,8 @@
       .sec{padding:38px 0;}
       .sechead h2{font-size:25px;}
     }
-  
-</style>
+  </style>
 </helmet>
-
 
 <div class="rj">
 
@@ -305,10 +304,10 @@
         <a class="logo" href="Main.dc.html"><img src="/_blob/0dd5b61fc6ec6dd7ea94adf1413a7cdb" alt="Rojone Pty Ltd"></a>
         <nav class="mainnav">
           <a href="Main.dc.html">Home</a>
-          <a href="#about">About us</a>
+          <a href="About.dc.html">About us</a>
         <details class="navdrop">
           <summary>Manufacturers <span class="caret">&#9660;</span></summary>
-          <div class="drop"><a href="Category.dc.html">Amphenol</a><a href="Category.dc.html">Astro Tool</a><a href="Category.dc.html">Cooper Antennas</a><a href="Category.dc.html">Fairview Microwave</a><a href="Category.dc.html">Fischer Connectors</a><a href="Category.dc.html">Freelin-Wade</a><a href="Category.dc.html">L-com</a><a href="Category.dc.html">MilesTek</a><a href="Category.dc.html">Pasternack</a><a href="Category.dc.html">Radiall</a><a href="Category.dc.html">RFS</a><a href="Category.dc.html">Spinner</a><a href="Category.dc.html">Times Microwave</a><div class="sep"></div><a href="Main.dc.html#manufacturers">All manufacturers &rarr;</a></div>
+          <div class="drop"><a href="Manufacturer.dc.html">Amphenol</a><a href="Manufacturer.dc.html">Astro Tool</a><a href="Manufacturer.dc.html">Cooper Antennas</a><a href="Manufacturer.dc.html">Fairview Microwave</a><a href="Manufacturer.dc.html">Fischer Connectors</a><a href="Manufacturer.dc.html">Freelin-Wade</a><a href="Manufacturer.dc.html">L-com</a><a href="Manufacturer.dc.html">MilesTek</a><a href="Manufacturer.dc.html">Pasternack</a><a href="Manufacturer.dc.html">Radiall</a><a href="Manufacturer.dc.html">RFS</a><a href="Manufacturer.dc.html">Spinner</a><a href="Manufacturer.dc.html">Times Microwave</a><div class="sep"></div><a href="Main.dc.html#manufacturers">All manufacturers &rarr;</a></div>
         </details>
         </nav>
         <label class="head-search">
@@ -420,14 +419,14 @@
       <div class="eyebrow">Manufacturers</div>
       <div class="mfrow">
         <div class="mftrack">
-          <img src="/_blob/fb360c93b8dddccfb8021954572fe7c0" alt="Cooper Antennas">
-          <img src="/_blob/17745e5738e519119cb82287a6f7c10c" alt="RFS">
-          <img src="/_blob/d3d0126217c3f3123b4ddcd79aa2e837" alt="Spinner">
-          <img src="/_blob/e85c65ce5abd6356b1a54ad9df77956b" alt="Astro Tool">
-          <img src="/_blob/de1a8b63580f8faaa33f230c2054b738" alt="Radiall">
-          <img src="/_blob/5f789481086a534eebd31ae86bc9c1a1" alt="MilesTek">
-          <img src="/_blob/e4035b24c0fd5ece7f534445d9d138bb" alt="Freelin-Wade">
-          <img src="/_blob/c2d9f26283782dbf98fdd9768801ebbe" alt="Fairview Microwave">
+        <img src="/_blob/fb360c93b8dddccfb8021954572fe7c0" alt="Cooper Antennas">
+        <img src="/_blob/17745e5738e519119cb82287a6f7c10c" alt="RFS">
+        <img src="/_blob/d3d0126217c3f3123b4ddcd79aa2e837" alt="Spinner">
+        <img src="/_blob/e85c65ce5abd6356b1a54ad9df77956b" alt="Astro Tool">
+        <img src="/_blob/de1a8b63580f8faaa33f230c2054b738" alt="Radiall">
+        <img src="/_blob/5f789481086a534eebd31ae86bc9c1a1" alt="MilesTek">
+        <img src="/_blob/e4035b24c0fd5ece7f534445d9d138bb" alt="Freelin-Wade">
+        <img src="/_blob/c2d9f26283782dbf98fdd9768801ebbe" alt="Fairview Microwave">
         </div>
       </div>
     </div>
@@ -443,7 +442,7 @@
         <a class="tlink" href="Category.dc.html">View all products &#8599;</a>
       </div>
       <div class="prodgrid">
-        <a class="prod" href="Category.dc.html">
+        <a class="prod" href="Product.dc.html">
           <div class="prod-img"><img src="/_blob/1c1e6ba23a292293bd6d8f446b8fa018" alt="Hand-held quick fold Yagi array"></div>
           <div class="prod-body">
             <div class="kicker">Antennas</div>
@@ -452,7 +451,7 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
+        <a class="prod" href="Product.dc.html">
           <div class="prod-img"><img src="/_blob/07b027613654fde6d9d941a07686edc2" alt="Pigtail MMT right angle female cable"></div>
           <div class="prod-body">
             <div class="kicker">Cable assemblies</div>
@@ -461,7 +460,7 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
+        <a class="prod" href="Product.dc.html">
           <div class="prod-img"><img src="/_blob/6741160be63b00aaa750d3c2c345fc5c" alt="Size 1 socket coaxial contact"></div>
           <div class="prod-body">
             <div class="kicker">Connectors</div>
@@ -470,7 +469,7 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
+        <a class="prod" href="Product.dc.html">
           <div class="prod-img"><img src="/_blob/29747c48705d1ca79db8e5ad83a893dd" alt="SSMC straight jack male gold"></div>
           <div class="prod-body">
             <div class="kicker">Connectors</div>
@@ -479,7 +478,7 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
+        <a class="prod" href="Product.dc.html">
           <div class="prod-img"><img src="/_blob/5ea84b30af13255f8769a164956cc1bb" alt="615179 positioner SK2/2"></div>
           <div class="prod-body">
             <div class="kicker">Tooling</div>
@@ -488,8 +487,8 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
-          <div class="prod-img"><img src="/_blob/53df0f7739bbf4b12429cc23fb408aa8" alt="Magnetic mount whip antenna"></div>
+        <a class="prod" href="Product.dc.html">
+          <div class="prod-img"><img src="/_blob/c14b411054b63cf5ba1368da465a9388" alt="Magnetic mount whip antenna"></div>
           <div class="prod-body">
             <div class="kicker">Antennas</div>
             <h3>Magnetic Mount Whip Antenna</h3>
@@ -497,8 +496,8 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
-          <div class="prod-img"><img src="/_blob/22b06095f2ee744bc9d1ea2ccbd442c4" alt="SMA male to SMA female adaptor, gold"></div>
+        <a class="prod" href="Product.dc.html">
+          <div class="prod-img"><img src="/_blob/f76356a0d9ac4f29a3a2f48c261441fa" alt="SMA male to SMA female adaptor, gold"></div>
           <div class="prod-body">
             <div class="kicker">Adaptors</div>
             <h3>SMA Male to SMA Female Adaptor, Gold</h3>
@@ -506,8 +505,8 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
-          <div class="prod-img"><img src="/_blob/cc042e7240677fe1cd333e7600261cc6" alt="Coaxial cable assembly"></div>
+        <a class="prod" href="Product.dc.html">
+          <div class="prod-img"><img src="/_blob/eb4dd2b587699ae9910309775bab050c" alt="Coaxial cable assembly"></div>
           <div class="prod-body">
             <div class="kicker">Cable assemblies</div>
             <h3>Coaxial Cable Assembly, Male to Male</h3>
@@ -515,8 +514,8 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
-          <div class="prod-img"><img src="/_blob/d3b3d952f074233590e7f768b16cf9d6" alt="LC to LC duplex fibre patch lead"></div>
+        <a class="prod" href="Product.dc.html">
+          <div class="prod-img"><img src="/_blob/6ecefea7cbdcb2f43fad59ef36cfecc2" alt="LC to LC duplex fibre patch lead"></div>
           <div class="prod-body">
             <div class="kicker">Fibre optics</div>
             <h3>LC to LC Duplex Fibre Patch Lead</h3>
@@ -524,8 +523,8 @@
             <div class="prod-foot"><span class="tlink">Request a quote &#8599;</span><span class="plus">+</span></div>
           </div>
         </a>
-        <a class="prod" href="Category.dc.html">
-          <div class="prod-img"><img src="/_blob/75aa6d14d891bc9e13d8fd2fe81fc2c9" alt="Ratchet crimp tool"></div>
+        <a class="prod" href="Product.dc.html">
+          <div class="prod-img"><img src="/_blob/b7ebd0f34bec7d83991a5c48b051d434" alt="Ratchet crimp tool"></div>
           <div class="prod-body">
             <div class="kicker">Tooling</div>
             <h3>Ratchet Crimp Tool</h3>
@@ -651,7 +650,7 @@
         </div>
         <div>
           <h4>Company</h4>
-          <a href="#about">About Rojone</a>
+          <a href="About.dc.html">About Rojone</a>
           <a href="#quote">Request a quote</a>
           <a href="#returns">Returns &amp; warranty</a>
           <a href="#contact">Contact us</a>
@@ -666,15 +665,15 @@
     </div>
   </footer>
 
-</div>
+<script>
+document.querySelectorAll('.mftrack').forEach(function(t){
+  var d=document.createElement('span');d.className='mfdup';d.setAttribute('aria-hidden','true');
+  t.querySelectorAll(':scope > img').forEach(function(i){var c=i.cloneNode();c.alt='';d.appendChild(c);});
+  t.appendChild(d);t.classList.add('loop');
+});
+</script>
 
-  <script>
-    document.querySelectorAll('.mftrack').forEach(function(t){
-      var d=document.createElement('span');d.className='mfdup';d.setAttribute('aria-hidden','true');
-      t.querySelectorAll(':scope > img').forEach(function(i){var c=i.cloneNode();c.alt='';d.appendChild(c);});
-      t.appendChild(d);t.classList.add('loop');
-    });
-  </script>
+</div>
 </x-dc>
 <script data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {

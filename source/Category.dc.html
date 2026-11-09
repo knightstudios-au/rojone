@@ -125,6 +125,9 @@
                display:flex;flex-direction:column;flex:1;gap:7px;}
     .sku{font-size:11.5px;color:#8b9099;letter-spacing:.04em;}
     .card h3{font-size:16px;font-weight:600;line-height:1.3;min-height:42px;}
+    .plink{color:inherit;text-decoration:none;}
+    .plink:hover{color:var(--red);}
+    a.card-img{text-decoration:none;}
     .spec{font-size:12.5px;color:var(--muted);}
     .avail{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}
     .avail.back{color:var(--amber);}
@@ -224,6 +227,8 @@
       .logo img{height:32px;}
       .head-search{display:none;}
       .headbar{background:linear-gradient(100deg,#fff 0%,#fff 30%,#91a4c1 62%,#1B2A4A 100%);}
+      .headbar .icon-btn{color:var(--navy);}
+      .headbar .icon-btn svg{stroke:var(--navy);}
       .icon-label{display:none;}
       .btn{padding:10px 14px;font-size:11.5px;}
       .banner h1{font-size:27px;}
@@ -231,9 +236,9 @@
       .card-img{height:200px;}
       .footgrid{grid-template-columns:1fr;gap:24px;}
     }
-  
   </style>
 </helmet>
+
 <div class="rj">
 
   <div class="hairline"></div>
@@ -242,8 +247,8 @@
     <div class="wrap">
       <span class="top-right">
         <a href="tel:+61298291555">+61 2 9829 1555</a>
-        <span class="locale"><span class="flag"></span>Australia <span class="caret">▼</span></span>
-        <span class="locale">AUD <span class="caret">▼</span></span>
+        <span class="locale"><span class="flag"></span>Australia <span class="caret">&#9660;</span></span>
+        <span class="locale">AUD <span class="caret">&#9660;</span></span>
       </span>
     </div>
   </div>
@@ -254,22 +259,22 @@
         <a class="logo" href="Main.dc.html"><img src="/_blob/0dd5b61fc6ec6dd7ea94adf1413a7cdb" alt="Rojone Pty Ltd"></a>
         <nav class="mainnav">
           <a href="Main.dc.html">Home</a>
-          <a href="Main.dc.html#about">About us</a>
+          <a href="About.dc.html">About us</a>
         <details class="navdrop">
-          <summary>Manufacturers <span class="caret">▼</span></summary>
-          <div class="drop"><a href="Category.dc.html">Amphenol</a><a href="Category.dc.html">Astro Tool</a><a href="Category.dc.html">Cooper Antennas</a><a href="Category.dc.html">Fairview Microwave</a><a href="Category.dc.html">Fischer Connectors</a><a href="Category.dc.html">Freelin-Wade</a><a href="Category.dc.html">L-com</a><a href="Category.dc.html">MilesTek</a><a href="Category.dc.html">Pasternack</a><a href="Category.dc.html">Radiall</a><a href="Category.dc.html">RFS</a><a href="Category.dc.html">Spinner</a><a href="Category.dc.html">Times Microwave</a><div class="sep"></div><a href="Main.dc.html#manufacturers">All manufacturers →</a></div>
+          <summary>Manufacturers <span class="caret">&#9660;</span></summary>
+          <div class="drop"><a href="Manufacturer.dc.html">Amphenol</a><a href="Manufacturer.dc.html">Astro Tool</a><a href="Manufacturer.dc.html">Cooper Antennas</a><a href="Manufacturer.dc.html">Fairview Microwave</a><a href="Manufacturer.dc.html">Fischer Connectors</a><a href="Manufacturer.dc.html">Freelin-Wade</a><a href="Manufacturer.dc.html">L-com</a><a href="Manufacturer.dc.html">MilesTek</a><a href="Manufacturer.dc.html">Pasternack</a><a href="Manufacturer.dc.html">Radiall</a><a href="Manufacturer.dc.html">RFS</a><a href="Manufacturer.dc.html">Spinner</a><a href="Manufacturer.dc.html">Times Microwave</a><div class="sep"></div><a href="Main.dc.html#manufacturers">All manufacturers &rarr;</a></div>
         </details>
         </nav>
         <label class="head-search">
           <input type="search" placeholder="Search products..." aria-label="Search products">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2.2"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.6-3.6"></path></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
         </label>
         <a class="icon-btn" href="#account">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><circle cx="12" cy="8" r="3.6"></circle><path d="M4.5 20c1.4-3.8 4.2-5.6 7.5-5.6s6.1 1.8 7.5 5.6"></path></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.4-3.8 4.2-5.6 7.5-5.6s6.1 1.8 7.5 5.6"/></svg>
           <span class="icon-label">Account</span>
         </a>
         <a class="icon-btn" href="#cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><path d="M3 4h2.2l2.3 10.4h9.6L19.5 7H6.2"></path><circle cx="9.5" cy="19" r="1.5"></circle><circle cx="17" cy="19" r="1.5"></circle></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.7"><path d="M3 4h2.2l2.3 10.4h9.6L19.5 7H6.2"/><circle cx="9.5" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
           <span class="cart-count">0</span>
           <span class="icon-label">Cart</span>
         </a>
@@ -280,7 +285,7 @@
     <nav class="catnav">
       <div class="wrap">
         <details class="catmenu all" name="catnav">
-          <summary>☰ All products <span class="caret">▼</span></summary>
+          <summary>&#9776; All products <span class="caret">&#9660;</span></summary>
           <div class="mega-panel">
             <div class="mega-intro"><strong>Explore our products</strong><span>Browse by product family</span></div>
             <div class="mega-columns">
@@ -292,35 +297,35 @@
           <div><h3>Headsets</h3><a href="Category.dc.html">Headsets &amp; Interconnect</a></div>
           <div><h3>RF Connectors &amp; Adaptors</h3><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
             </div>
-            <div class="mega-foot">Example category structure · final catalogue to be confirmed.</div>
+            <div class="mega-foot">Example category structure &middot; final catalogue to be confirmed.</div>
           </div>
         </details>
         <details class="catmenu current" name="catnav">
-          <summary>RF Connectors &amp; Adaptors <span class="caret">▼</span></summary>
+          <summary>RF Connectors &amp; Adaptors <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
         </details>
         <details class="catmenu" name="catnav">
-          <summary>Cable Assemblies <span class="caret">▼</span></summary>
+          <summary>Cable Assemblies <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">Coaxial Cable Assemblies</a><a href="Category.dc.html">Custom Cable Assemblies</a><a href="Category.dc.html">Semi-Rigid Assemblies</a></div>
         </details>
         <details class="catmenu" name="catnav">
-          <summary>Fibre Optics <span class="caret">▼</span></summary>
+          <summary>Fibre Optics <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">Fibre Patch Leads</a><a href="Category.dc.html">Optical Components</a><a href="Category.dc.html">RF over Fibre</a></div>
         </details>
         <details class="catmenu" name="catnav">
-          <summary>GPS Products <span class="caret">▼</span></summary>
+          <summary>GPS Products <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">Repeaters &amp; Splitters</a></div>
         </details>
         <details class="catmenu" name="catnav">
-          <summary>Antennas <span class="caret">▼</span></summary>
+          <summary>Antennas <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">Antenna Accessories</a><a href="Category.dc.html">GPS Antennas</a><a href="Category.dc.html">RF Antennas</a></div>
         </details>
         <details class="catmenu" name="catnav">
-          <summary>Components &amp; Tools <span class="caret">▼</span></summary>
+          <summary>Components &amp; Tools <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">Calibration &amp; Test Kits</a><a href="Category.dc.html">RF Components</a><a href="Category.dc.html">Tooling &amp; Accessories</a></div>
         </details>
         <details class="catmenu" name="catnav">
-          <summary>Headsets <span class="caret">▼</span></summary>
+          <summary>Headsets <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">Headsets &amp; Interconnect</a></div>
         </details>
       </div>
@@ -341,7 +346,7 @@
 
     <div class="catsearch">
       <input type="search" placeholder="Search this category by SKU, product or keyword..." aria-label="Search this category">
-      <button class="btn btn-red" type="button">Search →</button>
+      <button class="btn btn-red" type="button">Search &rarr;</button>
     </div>
 
     <div class="layout">
@@ -366,8 +371,8 @@
         </div>
         <div class="fgroup">
           <h3>Impedance</h3>
-          <label class="frow"><input type="checkbox">50Ω</label>
-          <label class="frow"><input type="checkbox">75Ω</label>
+          <label class="frow"><input type="checkbox">50&#937;</label>
+          <label class="frow"><input type="checkbox">75&#937;</label>
         </div>
         <div class="fgroup" style="margin-bottom:0;">
           <h3>Availability</h3>
@@ -393,103 +398,103 @@
 
         <div class="cards">
           <div class="card">
-            <div class="card-img"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA male to N-Type female adaptor"></div>
+            <a class="card-img" href="Product.dc.html"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA male to N-Type female adaptor"></a>
             <div class="card-body">
               <div class="sku">RJ-SMA-1421</div>
-              <h3>SMA Male to N-Type Female Adaptor, 50Ω</h3>
-              <div class="spec">Rojone · SMA · 50Ω</div>
+              <h3><a class="plink" href="Product.dc.html">SMA Male to N-Type Female Adaptor, 50&#937;</a></h3>
+              <div class="spec">Rojone &middot; SMA &middot; 50&#937;</div>
               <div class="avail">In stock</div>
               <div class="price">$18.40 <span>AUD</span></div>
               <div class="cardacts">
                 <a class="btn btn-red btn-sm" href="#cart">Add to cart</a>
                 <a class="btn btn-ghost btn-sm" href="#quote">+ Quote</a>
               </div>
-              <a class="ds" href="#datasheet">Datasheet PDF ↗</a>
+              <a class="ds" href="#datasheet">Datasheet PDF &#8599;</a>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-img"><img src="/_blob/3c7c4442ecf0f073b7438cd12ec219d7" alt="N-Type male straight crimp connector"></div>
+            <a class="card-img" href="Product.dc.html"><img src="/_blob/3c7c4442ecf0f073b7438cd12ec219d7" alt="N-Type male straight crimp connector"></a>
             <div class="card-body">
               <div class="sku">RJ-NM-2210</div>
-              <h3>N-Type Male Straight Crimp Connector</h3>
-              <div class="spec">Amphenol · N-Type · 50Ω</div>
+              <h3><a class="plink" href="Product.dc.html">N-Type Male Straight Crimp Connector</a></h3>
+              <div class="spec">Amphenol &middot; N-Type &middot; 50&#937;</div>
               <div class="avail">In stock</div>
               <div class="price">$11.90 <span>AUD</span></div>
               <div class="cardacts">
                 <a class="btn btn-red btn-sm" href="#cart">Add to cart</a>
                 <a class="btn btn-ghost btn-sm" href="#quote">+ Quote</a>
               </div>
-              <a class="ds" href="#datasheet">Datasheet PDF ↗</a>
+              <a class="ds" href="#datasheet">Datasheet PDF &#8599;</a>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-img"><img src="/_blob/e462e1506708aa36bf96d7477e53c71a" alt="BNC female bulkhead"></div>
+            <a class="card-img" href="Product.dc.html"><img src="/_blob/e462e1506708aa36bf96d7477e53c71a" alt="BNC female bulkhead"></a>
             <div class="card-body">
               <div class="sku">RJ-BNC-0087</div>
-              <h3>BNC Female Bulkhead, 75Ω</h3>
-              <div class="spec">Radiall · BNC · 75Ω</div>
+              <h3><a class="plink" href="Product.dc.html">BNC Female Bulkhead, 75&#937;</a></h3>
+              <div class="spec">Radiall &middot; BNC &middot; 75&#937;</div>
               <div class="avail back">Backorder</div>
               <div class="price">$9.20 <span>AUD</span></div>
               <div class="cardacts">
                 <a class="btn btn-red btn-sm" href="#cart">Add to cart</a>
                 <a class="btn btn-ghost btn-sm" href="#quote">+ Quote</a>
               </div>
-              <a class="ds" href="#datasheet">Datasheet PDF ↗</a>
+              <a class="ds" href="#datasheet">Datasheet PDF &#8599;</a>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-img"><img src="/_blob/971724b34ffcbdf4241477bf0117f641" alt="TNC male crimp connector"></div>
+            <a class="card-img" href="Product.dc.html"><img src="/_blob/971724b34ffcbdf4241477bf0117f641" alt="TNC male crimp connector"></a>
             <div class="card-body">
               <div class="sku">RJ-TNC-3305</div>
-              <h3>TNC Male Crimp Connector, RG-58</h3>
-              <div class="spec">Rojone · TNC · 50Ω</div>
+              <h3><a class="plink" href="Product.dc.html">TNC Male Crimp Connector, RG-58</a></h3>
+              <div class="spec">Rojone &middot; TNC &middot; 50&#937;</div>
               <div class="avail">In stock</div>
               <div class="price">$14.60 <span>AUD</span></div>
               <div class="cardacts">
                 <a class="btn btn-red btn-sm" href="#cart">Add to cart</a>
                 <a class="btn btn-ghost btn-sm" href="#quote">+ Quote</a>
               </div>
-              <a class="ds" href="#datasheet">Datasheet PDF ↗</a>
+              <a class="ds" href="#datasheet">Datasheet PDF &#8599;</a>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-img"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA female to SMA female adaptor"></div>
+            <a class="card-img" href="Product.dc.html"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA female to SMA female adaptor"></a>
             <div class="card-body">
               <div class="sku">RJ-SMA-1477</div>
-              <h3>SMA Female to SMA Female Adaptor</h3>
-              <div class="spec">Amphenol · SMA · 50Ω</div>
+              <h3><a class="plink" href="Product.dc.html">SMA Female to SMA Female Adaptor</a></h3>
+              <div class="spec">Amphenol &middot; SMA &middot; 50&#937;</div>
               <div class="avail">In stock</div>
               <div class="price">$16.10 <span>AUD</span></div>
               <div class="cardacts">
                 <a class="btn btn-red btn-sm" href="#cart">Add to cart</a>
                 <a class="btn btn-ghost btn-sm" href="#quote">+ Quote</a>
               </div>
-              <a class="ds" href="#datasheet">Datasheet PDF ↗</a>
+              <a class="ds" href="#datasheet">Datasheet PDF &#8599;</a>
             </div>
           </div>
 
           <div class="card">
-            <div class="card-img"><img src="/_blob/3c7c4442ecf0f073b7438cd12ec219d7" alt="UHF PL-259 male solder connector"></div>
+            <a class="card-img" href="Product.dc.html"><img src="/_blob/3c7c4442ecf0f073b7438cd12ec219d7" alt="UHF PL-259 male solder connector"></a>
             <div class="card-body">
               <div class="sku">RJ-UHF-5502</div>
-              <h3>UHF (PL-259) Male Solder Connector</h3>
-              <div class="spec">Rojone · UHF · 50Ω</div>
+              <h3><a class="plink" href="Product.dc.html">UHF (PL-259) Male Solder Connector</a></h3>
+              <div class="spec">Rojone &middot; UHF &middot; 50&#937;</div>
               <div class="avail">In stock</div>
               <div class="price">$8.75 <span>AUD</span></div>
               <div class="cardacts">
                 <a class="btn btn-red btn-sm" href="#cart">Add to cart</a>
                 <a class="btn btn-ghost btn-sm" href="#quote">+ Quote</a>
               </div>
-              <a class="ds" href="#datasheet">Datasheet PDF ↗</a>
+              <a class="ds" href="#datasheet">Datasheet PDF &#8599;</a>
             </div>
           </div>
         </div>
 
-        <p class="footnote">Design preview · product information and prices taken from the initial category concept, to be validated before launch.</p>
+        <p class="footnote">Design preview &middot; product information and prices taken from the initial category concept, to be validated before launch.</p>
       </div>
     </div>
   </main>
@@ -501,7 +506,7 @@
           <div class="footmark"><img src="/_blob/bad678488f8685c65015f48d6c476ef6" alt="Rojone Pty Ltd"></div>
           <p class="foot-note">RF, microwave and fibre optic components, assemblies and custom builds. Australian owned and manufacturing since 1978.</p>
           <a href="tel:+61298291555">+61 2 9829 1555</a>
-          <a href="mailto:sales@rojone.com.au">sales@rojone.com.au ↗</a>
+          <a href="mailto:sales@rojone.com.au">sales@rojone.com.au &#8599;</a>
           <a href="#contact">Ingleburn, NSW, Australia</a>
         </div>
         <div>
@@ -521,7 +526,7 @@
         </div>
         <div>
           <h4>Company</h4>
-          <a href="Main.dc.html#about">About Rojone</a>
+          <a href="About.dc.html">About Rojone</a>
           <a href="#quote">Request a quote</a>
           <a href="#returns">Returns &amp; warranty</a>
           <a href="#contact">Contact us</a>
@@ -530,8 +535,8 @@
     </div>
     <div class="footbar">
       <div class="wrap">
-        <span>© 2026 Rojone Pty Ltd · ISO 9001 certified · AUD pricing · Design concept, not a live storefront.</span>
-        <span>Privacy · Terms</span>
+        <span>&copy; 2026 Rojone Pty Ltd &middot; ISO 9001 certified &middot; AUD pricing &middot; Design concept, not a live storefront.</span>
+        <span>Privacy &middot; Terms</span>
       </div>
     </div>
   </footer>
