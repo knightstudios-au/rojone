@@ -265,11 +265,14 @@
     .decmark .dbar{margin-top:14px;width:46px;height:3px;background:var(--red);}
     .tl{list-style:none;margin:0;padding:0;position:relative;}
     .tl::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;
-                width:1px;background:var(--line-2);}
+                width:1px;background:#eef0f3;}
     .tlrow{position:relative;padding:0 0 26px 34px;}
     .tlrow:last-child{padding-bottom:0;}
     .tlrow::before{content:"";position:absolute;left:0;top:7px;width:11px;height:11px;
                    border-radius:50%;background:#fff;border:2.5px solid var(--red);}
+    .tlrow::after{content:"";position:absolute;left:5px;top:20px;bottom:-7px;width:1px;
+                  background:rgba(27,42,74,.3);transform-origin:top center;}
+    .tlrow:last-child::after{display:none;}
     .tlrow .yr{font-size:12px;font-weight:700;letter-spacing:.09em;color:var(--red);}
     .tlrow h3{font-size:17px;font-weight:600;line-height:1.3;margin:3px 0 5px;color:var(--ink);}
     .tlrow p{margin:0;color:#5b6473;font-size:14px;line-height:1.6;max-width:62ch;}
@@ -280,6 +283,39 @@
     .storycta p{margin:0;color:#4a5566;font-size:14px;}
     .storynote{color:#8b9099;font-size:12px;line-height:1.6;padding:26px 0 46px;
                border-top:1px solid var(--line);margin-top:40px;max-width:84ch;}
+
+
+    /* ---- scroll-driven reveal (progressive enhancement) ----
+       Base state is fully visible. The animation only applies where the browser
+       supports scroll-driven timelines and the viewer has not asked for reduced
+       motion, so the page can never render blank. */
+    @media (prefers-reduced-motion:no-preference){
+      @supports (animation-timeline:view()){
+        .tlrow{opacity:0;transform:translateY(16px);
+               animation:tlrise ease-out both;
+               animation-timeline:view();
+               animation-range:entry 0% cover 30%;}
+        @keyframes tlrise{to{opacity:1;transform:translateY(0);}}
+
+        .tlrow::before{transform:scale(.25);
+                       animation:dotpop ease-out both;
+                       animation-timeline:view();
+                       animation-range:entry 10% cover 38%;}
+        @keyframes dotpop{to{transform:scale(1);}}
+
+        .tlrow::after{transform:scaleY(0);
+                      animation:segdraw linear both;
+                      animation-timeline:view();
+                      animation-range:entry 10% cover 46%;}
+        @keyframes segdraw{to{transform:scaleY(1);}}
+
+        .decmark{opacity:0;transform:translateY(10px);
+                 animation:decfade ease-out both;
+                 animation-timeline:view();
+                 animation-range:entry 0% cover 25%;}
+        @keyframes decfade{to{opacity:1;transform:translateY(0);}}
+      }
+    }
 
     @media (max-width:1080px){
       .decbar{top:108px;}
