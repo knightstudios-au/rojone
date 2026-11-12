@@ -70,7 +70,7 @@
                 font-weight:700;min-width:15px;height:15px;border-radius:9px;display:flex;
                 align-items:center;justify-content:center;padding:0 4px;}
     /* category nav */
-    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;border-bottom:1px solid #d8e0ee;}
+    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;}
     .catnav .wrap{display:flex;align-items:center;gap:16px;}
     .catnav .wrap::-webkit-scrollbar{display:none;}
     .catnav a{display:flex;align-items:center;gap:5px;color:var(--navy);text-decoration:none;
@@ -281,7 +281,20 @@
       .sec{padding:38px 0;}
       .sechead h2{font-size:25px;}
     }
-  </style>
+  
+    /* ---- round 4 client feedback ---- */
+    /* Justified body copy, wide measures only. Narrow card copy stays left
+       aligned, because justification at that width opens rivers of white space. */
+    .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+      text-align:justify;text-justify:inter-word;}
+    @media (max-width:640px){
+      .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+        text-align:left;}
+    }
+    /* Only the current page is marked in the top nav. */
+    .mainnav a.on{color:var(--red);}
+    .mainnav .navdrop.on>summary{color:var(--red);}
+</style>
 </helmet>
 
 <div class="rj">
@@ -303,7 +316,7 @@
       <div class="wrap">
         <a class="logo" href="Main.dc.html"><img src="/_blob/0dd5b61fc6ec6dd7ea94adf1413a7cdb" alt="Rojone Pty Ltd"></a>
         <nav class="mainnav">
-          <a href="Main.dc.html">Home</a>
+          <a href="Main.dc.html" class="on">Home</a>
           <a href="About.dc.html">About us</a>
         <details class="navdrop">
           <summary>Manufacturers <span class="caret">&#9660;</span></summary>
@@ -345,7 +358,7 @@
             <div class="mega-foot">Example category structure &middot; final catalogue to be confirmed.</div>
           </div>
         </details>
-        <details class="catmenu current" name="catnav">
+        <details class="catmenu" name="catnav">
           <summary>RF Connectors &amp; Adaptors <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
         </details>

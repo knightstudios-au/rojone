@@ -68,7 +68,7 @@
     .cart-count{position:absolute;top:-5px;right:-8px;background:var(--red);color:#fff;font-size:9.5px;
                 font-weight:700;min-width:15px;height:15px;border-radius:9px;display:flex;
                 align-items:center;justify-content:center;padding:0 4px;}
-    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;border-bottom:1px solid #d8e0ee;}
+    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;}
     .catnav .wrap{display:flex;align-items:center;gap:16px;}
     .catnav .wrap::-webkit-scrollbar{display:none;}
     .catnav a{display:flex;align-items:center;gap:5px;color:var(--navy);text-decoration:none;
@@ -237,57 +237,76 @@
       .footgrid{grid-template-columns:1fr;gap:24px;}
     }
   
+    /* ---- round 4 client feedback ---- */
+    /* Justified body copy, wide measures only. Narrow card copy stays left
+       aligned, because justification at that width opens rivers of white space. */
+    .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+      text-align:justify;text-justify:inter-word;}
+    @media (max-width:640px){
+      .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+        text-align:left;}
+    }
+    /* Only the current page is marked in the top nav. */
+    .mainnav a.on{color:var(--red);}
+    .mainnav .navdrop.on>summary{color:var(--red);}
+
     /* ---- manufacturer page ---- */
     .mfhero{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:start;
             padding:6px 0 38px;}
     .mfhero h1{font-size:40px;font-weight:700;letter-spacing:-.015em;margin:9px 0 14px;}
     .mfhero p.lede2{margin:0;color:#4a5566;font-size:15px;line-height:1.68;max-width:62ch;}
+    .mfside{display:flex;flex-direction:column;gap:14px;}
     .mflogo{border:1px solid var(--line);border-radius:3px;background:#fff;
             display:flex;align-items:center;justify-content:center;padding:34px 30px;min-height:150px;}
     .mflogo img{max-width:100%;max-height:72px;object-fit:contain;}
-    .mffacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
-    .mffact{border:1px solid var(--line-2);border-radius:3px;background:var(--soft);
-            padding:10px 14px;min-width:132px;}
+    .mffacts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .mffact{border:1px solid var(--line-2);border-radius:3px;background:var(--soft);padding:10px 14px;}
     .mffact .fv{font-size:16px;font-weight:700;color:var(--navy);line-height:1.2;}
     .mffact .fl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
                 color:#8b9099;margin-top:3px;}
-    .brandpick{margin-top:22px;max-width:360px;}
+    .brandpick{position:relative;}
     .brandpick>summary{list-style:none;cursor:pointer;display:flex;align-items:center;
       justify-content:space-between;gap:10px;border:1px solid var(--line-2);border-radius:3px;
       background:#fff;padding:11px 14px;font-size:13px;font-weight:600;color:var(--navy);}
     .brandpick>summary::-webkit-details-marker{display:none;}
     .brandpick>summary:hover{border-color:var(--navy);}
-    .brandpick .picklist{border:1px solid var(--line-2);border-top:0;background:#fff;
-      max-height:280px;overflow:auto;display:flex;flex-direction:column;}
+    /* the list floats over the page so the block keeps its height */
+    .brandpick .picklist{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:40;
+      border:1px solid var(--line-2);border-top:2px solid var(--red);background:#fff;
+      max-height:300px;overflow:auto;display:flex;flex-direction:column;
+      box-shadow:0 16px 30px rgba(20,30,60,.18);}
     .brandpick .picklist a{padding:9px 14px;font-size:13px;color:var(--ink);text-decoration:none;
       border-top:1px solid var(--line);}
+    .brandpick .picklist a:first-child{border-top:0;}
     .brandpick .picklist a:hover{background:var(--soft);color:var(--red);}
 
     .rangesec{background:var(--soft);border-top:1px solid var(--line);
-              border-bottom:1px solid var(--line);padding:42px 0 46px;margin-top:4px;}
+              border-bottom:1px solid var(--line);padding:42px 0 46px;margin-top:4px;
+              scroll-margin-top:130px;}
     .rangehead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
                flex-wrap:wrap;margin-bottom:6px;}
     .rangehead h2{font-size:25px;font-weight:700;margin:6px 0 0;}
     .rangehead p{margin:5px 0 0;color:#62666e;font-size:13.5px;}
-    .dom-in{position:absolute;opacity:0;pointer-events:none;}
+    .dom-in,.showall-in{position:absolute;opacity:0;pointer-events:none;}
     .dombar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 22px;}
     .dombar label{cursor:pointer;user-select:none;border:1px solid var(--line-2);border-radius:3px;
       background:#fff;padding:7px 13px;font-size:12px;font-weight:700;letter-spacing:.02em;
       color:var(--navy);transition:background .12s,border-color .12s,color .12s;}
     .dombar label:hover{border-color:var(--navy);}
     .dombar .count{margin-left:6px;font-weight:600;font-size:11px;color:#9aa1ab;}
+
     .rangegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch;}
-    .rcard{background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+    .rcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:3px;
            display:flex;flex-direction:column;}
     .rcard .rimg{height:132px;display:flex;align-items:center;justify-content:center;padding:14px;}
     .rcard .rimg img{max-width:100%;max-height:100%;object-fit:contain;}
-    .rcard .rbody{padding:14px 16px 16px;border-top:1px solid var(--line);background:var(--soft);
-                  display:flex;flex-direction:column;gap:6px;flex:1;}
+    .rcard .rbody{position:relative;padding:14px 16px 16px;border-top:1px solid var(--line);
+                  background:var(--soft);display:flex;flex-direction:column;gap:6px;flex:1;}
     .rcard .rdom{font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
                  color:#8b9099;}
     .rcard h3{font-size:16px;font-weight:600;margin:0;color:var(--ink);}
-    .rcard p{margin:0;font-size:13px;line-height:1.55;color:#5b6473;}
-    .subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
+    .rpop p{margin:0;font-size:13px;line-height:1.55;color:#5b6473;}
+    .subs{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
     .subs .sl{width:100%;font-size:10px;font-weight:700;letter-spacing:.1em;
               text-transform:uppercase;color:#9aa1ab;margin-bottom:1px;}
     .sub{position:relative;border:1px solid var(--line-2);border-radius:2px;background:#fff;
@@ -296,32 +315,94 @@
       position:absolute;left:0;bottom:calc(100% + 7px);z-index:30;width:218px;
       background:var(--navy);color:#fff;font-size:11.5px;font-weight:500;line-height:1.45;
       padding:8px 10px;border-radius:3px;box-shadow:0 8px 20px rgba(20,30,60,.22);}
+    .rx{position:absolute;opacity:0;pointer-events:none;}
+    .rmore{display:none;align-self:flex-start;margin-top:2px;cursor:pointer;user-select:none;
+           border:1px solid var(--line-2);border-radius:3px;background:#fff;color:var(--navy);
+           font-size:13px;font-weight:700;line-height:1;letter-spacing:.08em;padding:4px 9px 6px;}
+    .rmore:hover{border-color:var(--red);color:var(--red);}
 
-    .alldetails{margin-top:24px;}
-    .alldetails>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
-      border:1px solid var(--line-2);border-radius:3px;background:#fff;padding:10px 16px;
-      font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--navy);}
-    .alldetails>summary::-webkit-details-marker{display:none;}
-    .alldetails>summary:hover{border-color:var(--navy);}
-    .alltable{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:3px;}
-    .allgroup{border-bottom:1px solid var(--line);}
-    .allgroup:last-child{border-bottom:0;}
-    .allgroup .gh{padding:11px 16px;background:var(--soft);font-size:11px;font-weight:700;
-                  letter-spacing:.11em;text-transform:uppercase;color:#62666e;
-                  border-bottom:1px solid var(--line);}
-    .allrow{display:grid;grid-template-columns:200px 1fr;gap:18px;padding:11px 16px;
-            border-bottom:1px solid var(--line);font-size:13px;}
-    .allrow:last-child{border-bottom:0;}
-    .allrow .rn{font-weight:600;color:var(--ink);}
-    .allrow .rd{color:#5b6473;line-height:1.55;}
+    .rangefoot{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:26px;}
+    .showmore{cursor:pointer;user-select:none;border:1px solid var(--line-2);border-radius:3px;
+              background:#fff;padding:10px 18px;font-size:12px;font-weight:700;letter-spacing:.03em;
+              text-transform:uppercase;color:var(--navy);}
+    .showmore:hover{border-color:var(--navy);}
+    .showmore::after{content:"Show all 56 ranges";}
+    .totop{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);background:#fff;
+           display:flex;align-items:center;justify-content:center;color:var(--navy);
+           text-decoration:none;font-size:15px;line-height:1;}
+    .totop:hover{border-color:var(--red);color:var(--red);}
+
+    /* first 12 only, until the reader asks for the rest */
+    #dom-all:checked ~ .rangegrid > .rcard:nth-of-type(n+13){display:none;}
+    /* show all, and switch to compact equal-height cards */
+    #showall:checked ~ .rangegrid > .rcard:nth-of-type(n+13){display:flex;}
+    #showall:checked ~ .rangegrid{grid-template-columns:repeat(6,1fr);gap:12px;}
+    #showall:checked ~ .rangegrid .rimg{height:84px;padding:10px;}
+    #showall:checked ~ .rangegrid .rbody{padding:10px 12px 12px;gap:4px;}
+    #showall:checked ~ .rangegrid h3{font-size:13.5px;line-height:1.25;}
+    #showall:checked ~ .rangegrid .rdom{font-size:9.5px;}
+    #showall:checked ~ .rangegrid .rpop{display:none;}
+    #showall:checked ~ .rangegrid .rmore{display:inline-flex;}
+    #showall:checked ~ .rangegrid .rx:checked ~ .rbody .rpop{display:block;position:absolute;
+      left:-1px;right:-1px;top:calc(100% - 6px);z-index:9;background:#fff;
+      border:1px solid var(--line-2);border-top:2px solid var(--red);
+      box-shadow:0 16px 30px rgba(20,30,60,.2);padding:12px 14px 14px;}
+    #showall:checked ~ .rangefoot .showmore::after{content:"Show the first 12 only";}
+    /* a domain filter already narrows the set, so the toggle steps aside */
+    #dom-all:not(:checked) ~ .rangefoot .showmore{display:none;}
+    #dom-all:checked ~ .dombar label[for="dom-all"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-all:checked ~ .dombar label[for="dom-all"] .count{color:rgba(255,255,255,.72);}
+    #dom-activeoptics:checked ~ .rangegrid > .rcard:not([data-domain="activeoptics"]){display:none;}
+    #dom-activeoptics:checked ~ .rangegrid > .rcard[data-domain="activeoptics"]{display:flex;}
+    #dom-activeoptics:checked ~ .dombar label[for="dom-activeoptics"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-activeoptics:checked ~ .dombar label[for="dom-activeoptics"] .count{color:rgba(255,255,255,.72);}
+    #dom-fibreoptics:checked ~ .rangegrid > .rcard:not([data-domain="fibreoptics"]){display:none;}
+    #dom-fibreoptics:checked ~ .rangegrid > .rcard[data-domain="fibreoptics"]{display:flex;}
+    #dom-fibreoptics:checked ~ .dombar label[for="dom-fibreoptics"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-fibreoptics:checked ~ .dombar label[for="dom-fibreoptics"] .count{color:rgba(255,255,255,.72);}
+    #dom-heavyduty:checked ~ .rangegrid > .rcard:not([data-domain="heavyduty"]){display:none;}
+    #dom-heavyduty:checked ~ .rangegrid > .rcard[data-domain="heavyduty"]{display:flex;}
+    #dom-heavyduty:checked ~ .dombar label[for="dom-heavyduty"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-heavyduty:checked ~ .dombar label[for="dom-heavyduty"] .count{color:rgba(255,255,255,.72);}
+    #dom-microwave:checked ~ .rangegrid > .rcard:not([data-domain="microwave"]){display:none;}
+    #dom-microwave:checked ~ .rangegrid > .rcard[data-domain="microwave"]{display:flex;}
+    #dom-microwave:checked ~ .dombar label[for="dom-microwave"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-microwave:checked ~ .dombar label[for="dom-microwave"] .count{color:rgba(255,255,255,.72);}
+    #dom-multipin:checked ~ .rangegrid > .rcard:not([data-domain="multipin"]){display:none;}
+    #dom-multipin:checked ~ .rangegrid > .rcard[data-domain="multipin"]{display:flex;}
+    #dom-multipin:checked ~ .dombar label[for="dom-multipin"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-multipin:checked ~ .dombar label[for="dom-multipin"] .count{color:rgba(255,255,255,.72);}
+    #dom-opticalcables:checked ~ .rangegrid > .rcard:not([data-domain="opticalcables"]){display:none;}
+    #dom-opticalcables:checked ~ .rangegrid > .rcard[data-domain="opticalcables"]{display:flex;}
+    #dom-opticalcables:checked ~ .dombar label[for="dom-opticalcables"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-opticalcables:checked ~ .dombar label[for="dom-opticalcables"] .count{color:rgba(255,255,255,.72);}
+    #dom-outdoor:checked ~ .rangegrid > .rcard:not([data-domain="outdoor"]){display:none;}
+    #dom-outdoor:checked ~ .rangegrid > .rcard[data-domain="outdoor"]{display:flex;}
+    #dom-outdoor:checked ~ .dombar label[for="dom-outdoor"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-outdoor:checked ~ .dombar label[for="dom-outdoor"] .count{color:rgba(255,255,255,.72);}
+    #dom-rfcables:checked ~ .rangegrid > .rcard:not([data-domain="rfcables"]){display:none;}
+    #dom-rfcables:checked ~ .rangegrid > .rcard[data-domain="rfcables"]{display:flex;}
+    #dom-rfcables:checked ~ .dombar label[for="dom-rfcables"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-rfcables:checked ~ .dombar label[for="dom-rfcables"] .count{color:rgba(255,255,255,.72);}
+    #dom-rfconnectors:checked ~ .rangegrid > .rcard:not([data-domain="rfconnectors"]){display:none;}
+    #dom-rfconnectors:checked ~ .rangegrid > .rcard[data-domain="rfconnectors"]{display:flex;}
+    #dom-rfconnectors:checked ~ .dombar label[for="dom-rfconnectors"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-rfconnectors:checked ~ .dombar label[for="dom-rfconnectors"] .count{color:rgba(255,255,255,.72);}
+    #dom-space:checked ~ .rangegrid > .rcard:not([data-domain="space"]){display:none;}
+    #dom-space:checked ~ .rangegrid > .rcard[data-domain="space"]{display:flex;}
+    #dom-space:checked ~ .dombar label[for="dom-space"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-space:checked ~ .dombar label[for="dom-space"] .count{color:rgba(255,255,255,.72);}
+    #dom-switches:checked ~ .rangegrid > .rcard:not([data-domain="switches"]){display:none;}
+    #dom-switches:checked ~ .rangegrid > .rcard[data-domain="switches"]{display:flex;}
+    #dom-switches:checked ~ .dombar label[for="dom-switches"]{background:var(--red);border-color:var(--red);color:#fff;}
+    #dom-switches:checked ~ .dombar label[for="dom-switches"] .count{color:rgba(255,255,255,.72);}
 
     .feat2{padding:44px 0 10px;}
     .feat2grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
     .whyband{padding:46px 0 52px;text-align:center;}
     .whyband h2{font-size:25px;font-weight:700;margin:0;}
     .whyband .sub2{color:#62666e;font-size:14px;margin:7px 0 0;}
-    .whygrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;
-              text-align:left;}
+    .whygrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;text-align:left;}
     .whycard{background:var(--panel);border-radius:3px;padding:24px 22px;}
     .whycard .wi{width:38px;height:38px;border-radius:50%;background:var(--red);
                  display:flex;align-items:center;justify-content:center;margin-bottom:13px;}
@@ -331,6 +412,7 @@
 
     @media (max-width:1180px){
       .rangegrid{grid-template-columns:repeat(3,1fr);}
+      #showall:checked ~ .rangegrid{grid-template-columns:repeat(4,1fr);}
       .feat2grid{grid-template-columns:repeat(3,1fr);}
     }
     @media (max-width:1080px){
@@ -341,53 +423,18 @@
       .mfhero{grid-template-columns:1fr;gap:22px;}
       .mflogo{min-height:120px;padding:24px;}
       .rangegrid{grid-template-columns:repeat(2,1fr);}
+      #showall:checked ~ .rangegrid{grid-template-columns:repeat(3,1fr);}
       .feat2grid{grid-template-columns:repeat(2,1fr);}
       .whygrid3{grid-template-columns:1fr;}
-      .allrow{grid-template-columns:1fr;gap:4px;}
     }
     @media (max-width:640px){
       .mfhero h1{font-size:28px;}
+      .mffacts{grid-template-columns:1fr 1fr;}
       .rangegrid{grid-template-columns:1fr;}
+      #showall:checked ~ .rangegrid{grid-template-columns:repeat(2,1fr);}
       .feat2grid{grid-template-columns:1fr;}
-      .brandpick{max-width:none;}
       .sub[data-tip]:hover::after,.sub[data-tip]:focus::after{width:200px;left:auto;right:0;}
     }
-
-    #dom-all:checked ~ .dombar label[for="dom-all"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-all:checked ~ .dombar label[for="dom-all"] .count{color:rgba(255,255,255,.72);}
-    #dom-activeoptics:checked ~ .rangegrid > .rcard:not([data-domain="activeoptics"]){display:none;}
-    #dom-activeoptics:checked ~ .dombar label[for="dom-activeoptics"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-activeoptics:checked ~ .dombar label[for="dom-activeoptics"] .count{color:rgba(255,255,255,.72);}
-    #dom-fibreoptics:checked ~ .rangegrid > .rcard:not([data-domain="fibreoptics"]){display:none;}
-    #dom-fibreoptics:checked ~ .dombar label[for="dom-fibreoptics"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-fibreoptics:checked ~ .dombar label[for="dom-fibreoptics"] .count{color:rgba(255,255,255,.72);}
-    #dom-heavyduty:checked ~ .rangegrid > .rcard:not([data-domain="heavyduty"]){display:none;}
-    #dom-heavyduty:checked ~ .dombar label[for="dom-heavyduty"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-heavyduty:checked ~ .dombar label[for="dom-heavyduty"] .count{color:rgba(255,255,255,.72);}
-    #dom-microwave:checked ~ .rangegrid > .rcard:not([data-domain="microwave"]){display:none;}
-    #dom-microwave:checked ~ .dombar label[for="dom-microwave"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-microwave:checked ~ .dombar label[for="dom-microwave"] .count{color:rgba(255,255,255,.72);}
-    #dom-multipin:checked ~ .rangegrid > .rcard:not([data-domain="multipin"]){display:none;}
-    #dom-multipin:checked ~ .dombar label[for="dom-multipin"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-multipin:checked ~ .dombar label[for="dom-multipin"] .count{color:rgba(255,255,255,.72);}
-    #dom-opticalcables:checked ~ .rangegrid > .rcard:not([data-domain="opticalcables"]){display:none;}
-    #dom-opticalcables:checked ~ .dombar label[for="dom-opticalcables"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-opticalcables:checked ~ .dombar label[for="dom-opticalcables"] .count{color:rgba(255,255,255,.72);}
-    #dom-outdoor:checked ~ .rangegrid > .rcard:not([data-domain="outdoor"]){display:none;}
-    #dom-outdoor:checked ~ .dombar label[for="dom-outdoor"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-outdoor:checked ~ .dombar label[for="dom-outdoor"] .count{color:rgba(255,255,255,.72);}
-    #dom-rfcables:checked ~ .rangegrid > .rcard:not([data-domain="rfcables"]){display:none;}
-    #dom-rfcables:checked ~ .dombar label[for="dom-rfcables"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-rfcables:checked ~ .dombar label[for="dom-rfcables"] .count{color:rgba(255,255,255,.72);}
-    #dom-rfconnectors:checked ~ .rangegrid > .rcard:not([data-domain="rfconnectors"]){display:none;}
-    #dom-rfconnectors:checked ~ .dombar label[for="dom-rfconnectors"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-rfconnectors:checked ~ .dombar label[for="dom-rfconnectors"] .count{color:rgba(255,255,255,.72);}
-    #dom-space:checked ~ .rangegrid > .rcard:not([data-domain="space"]){display:none;}
-    #dom-space:checked ~ .dombar label[for="dom-space"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-space:checked ~ .dombar label[for="dom-space"] .count{color:rgba(255,255,255,.72);}
-    #dom-switches:checked ~ .rangegrid > .rcard:not([data-domain="switches"]){display:none;}
-    #dom-switches:checked ~ .dombar label[for="dom-switches"]{background:var(--red);border-color:var(--red);color:#fff;}
-    #dom-switches:checked ~ .dombar label[for="dom-switches"] .count{color:rgba(255,255,255,.72);}
 </style>
 </helmet>
 
@@ -412,7 +459,7 @@
         <nav class="mainnav">
           <a href="Main.dc.html">Home</a>
           <a href="About.dc.html">About us</a>
-        <details class="navdrop">
+        <details class="navdrop on">
           <summary>Manufacturers <span class="caret">&#9660;</span></summary>
           <div class="drop"><a href="Manufacturer.dc.html">Amphenol</a><a href="Manufacturer.dc.html">Astro Tool</a><a href="Manufacturer.dc.html">Cooper Antennas</a><a href="Manufacturer.dc.html">Fairview Microwave</a><a href="Manufacturer.dc.html">Fischer Connectors</a><a href="Manufacturer.dc.html">Freelin-Wade</a><a href="Manufacturer.dc.html">L-com</a><a href="Manufacturer.dc.html">MilesTek</a><a href="Manufacturer.dc.html">Pasternack</a><a href="Manufacturer.dc.html">Radiall</a><a href="Manufacturer.dc.html">RFS</a><a href="Manufacturer.dc.html">Spinner</a><a href="Manufacturer.dc.html">Times Microwave</a><div class="sep"></div><a href="Main.dc.html#manufacturers">All manufacturers &rarr;</a></div>
         </details>
@@ -452,7 +499,7 @@
             <div class="mega-foot">Example category structure &middot; final catalogue to be confirmed.</div>
           </div>
         </details>
-        <details class="catmenu current" name="catnav">
+        <details class="catmenu" name="catnav">
           <summary>RF Connectors &amp; Adaptors <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
         </details>
@@ -495,21 +542,24 @@
           Founded in 1952, the company serves demanding aerospace, defence, telecommunications and
           industrial applications. Rojone has distributed Radiall in Australia since 1984 and can help
           you select the right parts for your project.</p>
+        </div>
+        <div class="mfside">
+          <div class="mflogo"><img src="/_blob/bd0a475d418cfc33d865a873760864b4" alt="Radiall"></div>
           <div class="mffacts">
             <div class="mffact"><div class="fv">Since 1984</div><div class="fl">Rojone partnership</div></div>
             <div class="mffact"><div class="fv">56</div><div class="fl">Product ranges</div></div>
             <div class="mffact"><div class="fv">Authorised</div><div class="fl">Australian distributor</div></div>
+            <div class="mffact"><div class="fv">Ingleburn</div><div class="fl">Stocked in NSW</div></div>
           </div>
           <details class="brandpick">
             <summary>Switch manufacturer <span class="caret">&#9660;</span></summary>
-            <div class="picklist"><a href="Manufacturer.dc.html">Amphenol Nexus</a><a href="Manufacturer.dc.html">Astrocom Electronics</a><a href="Manufacturer.dc.html">Astro Tool</a><a href="Manufacturer.dc.html">CommScope</a><a href="Manufacturer.dc.html">Cooper Antennas</a><a href="Manufacturer.dc.html">Fairview Microwave</a><a href="Manufacturer.dc.html">Fischer Connectors</a><a href="Manufacturer.dc.html">Freelin-Wade</a><a href="Manufacturer.dc.html">IW Insulated Wire</a><a href="Manufacturer.dc.html">Konnect RF</a><a href="Manufacturer.dc.html">L-com</a><a href="Manufacturer.dc.html">MilesTek</a><a href="Manufacturer.dc.html">Mobile Mark</a><a href="Manufacturer.dc.html">Nextek</a><a href="Manufacturer.dc.html">Optical Zonu</a><a href="Manufacturer.dc.html">Pasternack</a><a href="Manufacturer.dc.html">Radiall</a><a href="Manufacturer.dc.html">RFS</a><a href="Manufacturer.dc.html">Rojone</a><a href="Manufacturer.dc.html">Satel</a><a href="Manufacturer.dc.html">Shireen</a><a href="Manufacturer.dc.html">Sinclair Technologies</a><a href="Manufacturer.dc.html">Spinner Group</a><a href="Manufacturer.dc.html">Times Microwave Systems</a><a href="Manufacturer.dc.html">Van System</a></div>
+            <div class="picklist"><a href="Manufacturer.dc.html">Amphenol Nexus</a><a href="Manufacturer.dc.html">Astrocom Electronics</a><a href="Manufacturer.dc.html">Astro Tool</a><a href="Manufacturer.dc.html">CommScope</a><a href="Manufacturer.dc.html">Cooper Antennas</a><a href="Manufacturer.dc.html">Fairview Microwave</a><a href="Manufacturer.dc.html">Fischer Connectors</a><a href="Manufacturer.dc.html">Freelin-Wade</a><a href="Manufacturer.dc.html">IW Insulated Wire</a><a href="Manufacturer.dc.html">Konnect RF</a><a href="Manufacturer.dc.html">L-com</a><a href="Manufacturer.dc.html">MilesTek</a><a href="Manufacturer.dc.html">Mobile Mark</a><a href="Manufacturer.dc.html">NexTek</a><a href="Manufacturer.dc.html">Optical Zonu</a><a href="Manufacturer.dc.html">Pasternack</a><a href="Manufacturer.dc.html">Radiall</a><a href="Manufacturer.dc.html">RFS</a><a href="Manufacturer.dc.html">Rojone</a><a href="Manufacturer.dc.html">Satel</a><a href="Manufacturer.dc.html">Shireen</a><a href="Manufacturer.dc.html">Sinclair Technologies</a><a href="Manufacturer.dc.html">Spinner</a><a href="Manufacturer.dc.html">Times Microwave Systems</a><a href="Manufacturer.dc.html">Van System</a></div>
           </details>
         </div>
-        <div class="mflogo"><img src="/_blob/bd0a475d418cfc33d865a873760864b4" alt="Radiall"></div>
       </div>
     </div>
 
-    <section class="rangesec">
+    <section class="rangesec" id="ranges">
       <div class="wrap">
         <div class="rangehead">
           <div>
@@ -521,132 +571,717 @@
         </div>
         <input class="dom-in" type="radio" name="domain" id="dom-all" checked>
         <input class="dom-in" type="radio" name="domain" id="dom-activeoptics">
+        <input class="dom-in" type="radio" name="domain" id="dom-fibreoptics">
+        <input class="dom-in" type="radio" name="domain" id="dom-heavyduty">
+        <input class="dom-in" type="radio" name="domain" id="dom-microwave">
         <input class="dom-in" type="radio" name="domain" id="dom-multipin">
         <input class="dom-in" type="radio" name="domain" id="dom-opticalcables">
         <input class="dom-in" type="radio" name="domain" id="dom-outdoor">
         <input class="dom-in" type="radio" name="domain" id="dom-rfcables">
         <input class="dom-in" type="radio" name="domain" id="dom-rfconnectors">
         <input class="dom-in" type="radio" name="domain" id="dom-space">
+        <input class="dom-in" type="radio" name="domain" id="dom-switches">
+        <input class="showall-in" type="checkbox" id="showall">
         <div class="dombar">
-          <label for="dom-all">All ranges<span class="count">12</span></label>
+          <label for="dom-all">All ranges<span class="count">56</span></label>
           <label for="dom-activeoptics">Active Optics<span class="count">1</span></label>
-          <label for="dom-multipin">Multipin<span class="count">1</span></label>
+          <label for="dom-fibreoptics">Fibre Optics<span class="count">8</span></label>
+          <label for="dom-heavyduty">Heavy Duty<span class="count">1</span></label>
+          <label for="dom-microwave">Microwave<span class="count">2</span></label>
+          <label for="dom-multipin">Multipin<span class="count">15</span></label>
           <label for="dom-opticalcables">Optical Cables<span class="count">1</span></label>
-          <label for="dom-outdoor">Outdoor<span class="count">1</span></label>
+          <label for="dom-outdoor">Outdoor<span class="count">4</span></label>
           <label for="dom-rfcables">RF Cables<span class="count">2</span></label>
-          <label for="dom-rfconnectors">RF Connectors<span class="count">5</span></label>
+          <label for="dom-rfconnectors">RF Connectors<span class="count">17</span></label>
           <label for="dom-space">Space<span class="count">1</span></label>
+          <label for="dom-switches">Switches<span class="count">4</span></label>
         </div>
         <div class="rangegrid">
           <article class="rcard" data-domain="rfconnectors">
-            <div class="rimg"><img src="/_blob/76c6883876f2588ac6ab294c8a52f3cf" alt="IMP"></div>
+            <input class="rx" type="checkbox" id="rx-imp">
+            <div class="rimg"><img src="/_blob/76c6883876f2588ac6ab294c8a52f3cf" alt="IMP" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">RF Connectors</div>
               <h3>IMP</h3>
-              <p>Miniature pressure-contact interconnects for solderless board-to-board connections.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Miniature pressure-contact interconnect in the IMP family for solderless connections.">IMP-HD</span><span class="sub" tabindex="0" data-tip="Low-profile IMP pressure contacts for compact board-to-board connections.">IMP-LP</span><span class="sub" tabindex="0" data-tip="Miniature solderless interconnects in the IMP family.">IMP-SR</span></div>
+              <label class="rmore" for="rx-imp" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Miniature pressure-contact interconnects for solderless board-to-board connections.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Miniature pressure-contact interconnect in the IMP family for solderless connections.">IMP-HD</span><span class="sub" tabindex="0" data-tip="Low-profile IMP pressure contacts for compact board-to-board connections.">IMP-LP</span><span class="sub" tabindex="0" data-tip="Miniature solderless interconnects in the IMP family.">IMP-SR</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="rfcables">
-            <div class="rimg"><img src="/_blob/5162901d5ceeebca19563065ce769886" alt="TestPro™"></div>
+            <input class="rx" type="checkbox" id="rx-testpro">
+            <div class="rimg"><img src="/_blob/5162901d5ceeebca19563065ce769886" alt="TestPro™" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">RF Cables</div>
               <h3>TestPro™</h3>
-              <p>RF test cable assemblies for repeatable laboratory and measurement connections.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Test cable option designed for stable phase performance during measurements.">TestPro 3</span><span class="sub" tabindex="0" data-tip="Test cable option designed for stable phase performance during measurements.">TestPro 4.2</span><span class="sub" tabindex="0" data-tip="Ultra-low-loss TestPro cable option for laboratory and measurement applications.">TestPro 5</span><span class="sub" tabindex="0" data-tip="Ultra-low-loss TestPro cable option for laboratory and measurement applications.">TestPro 8</span></div>
+              <label class="rmore" for="rx-testpro" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF test cable assemblies for repeatable laboratory and measurement connections.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Test cable option designed for stable phase performance during measurements.">TestPro 3</span><span class="sub" tabindex="0" data-tip="Test cable option designed for stable phase performance during measurements.">TestPro 4.2</span><span class="sub" tabindex="0" data-tip="Ultra-low-loss TestPro cable option for laboratory and measurement applications.">TestPro 5</span><span class="sub" tabindex="0" data-tip="Ultra-low-loss TestPro cable option for laboratory and measurement applications.">TestPro 8</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="rfcables">
-            <div class="rimg"><img src="/_blob/6f19b497899f035696c5f4cebbc0f30c" alt="SHF"></div>
+            <input class="rx" type="checkbox" id="rx-shf">
+            <div class="rimg"><img src="/_blob/6f19b497899f035696c5f4cebbc0f30c" alt="SHF" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">RF Cables</div>
               <h3>SHF</h3>
-              <p>Low-loss, high-frequency flexible RF cable assemblies.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Lightweight SHF cable assemblies where reducing cable weight is important.">Ultra Light Weight</span><span class="sub" tabindex="0" data-tip="SHF flexible cable assemblies for general RF and microwave interconnections.">General Interconnect</span><span class="sub" tabindex="0" data-tip="SHF cable assemblies with added mechanical protection.">Armored</span><span class="sub" tabindex="0" data-tip="Outdoor SHF cable option with a low-smoke, zero-halogen jacket.">LSZH Outdoor</span><span class="sub" tabindex="0" data-tip="SHF flexible cable variants offered for space applications.">Space: 2.4MS / 3MS / 4.8MS / 5MS / 8MS</span></div>
+              <label class="rmore" for="rx-shf" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Low-loss, high-frequency flexible RF cable assemblies.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Lightweight SHF cable assemblies where reducing cable weight is important.">Ultra Light Weight</span><span class="sub" tabindex="0" data-tip="SHF flexible cable assemblies for general RF and microwave interconnections.">General Interconnect</span><span class="sub" tabindex="0" data-tip="SHF cable assemblies with added mechanical protection.">Armored</span><span class="sub" tabindex="0" data-tip="Outdoor SHF cable option with a low-smoke, zero-halogen jacket.">LSZH Outdoor</span><span class="sub" tabindex="0" data-tip="SHF flexible cable variants offered for space applications.">Space: 2.4MS / 3MS / 4.8MS / 5MS / 8MS</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="multipin">
-            <div class="rimg"><img src="/_blob/9bb1292a5f61ec40ea7a86b94ac70ee4" alt="EPX™"></div>
+            <input class="rx" type="checkbox" id="rx-epx">
+            <div class="rimg"><img src="/_blob/9bb1292a5f61ec40ea7a86b94ac70ee4" alt="EPX™" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">Multipin</div>
               <h3>EPX™</h3>
-              <p>Modular multipin connectors for aerospace interconnect systems.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="An EPX modular multipin connector variant for aerospace interconnections.">EPXA</span><span class="sub" tabindex="0" data-tip="An EPX modular multipin connector variant for aerospace interconnections.">EPXB</span></div>
+              <label class="rmore" for="rx-epx" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Modular multipin connectors for aerospace interconnect systems.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="An EPX modular multipin connector variant for aerospace interconnections.">EPXA</span><span class="sub" tabindex="0" data-tip="An EPX modular multipin connector variant for aerospace interconnections.">EPXB</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="outdoor">
-            <div class="rimg"><img src="/_blob/804678af1999650b26cd60f3a85129bc" alt="OCTIS™"></div>
+            <input class="rx" type="checkbox" id="rx-octis">
+            <div class="rimg"><img src="/_blob/804678af1999650b26cd60f3a85129bc" alt="OCTIS™" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">Outdoor</div>
               <h3>OCTIS™</h3>
-              <p>Rugged connectivity solutions for outdoor and industrial installations.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="An OCTIS variant for outdoor interconnect installations.">Thermal+</span><span class="sub" tabindex="0" data-tip="An OCTIS receptacle variant with a die-cast housing.">Diecast Receptacle</span></div>
+              <label class="rmore" for="rx-octis" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Rugged connectivity solutions for outdoor and industrial installations.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="An OCTIS variant for outdoor interconnect installations.">Thermal+</span><span class="sub" tabindex="0" data-tip="An OCTIS receptacle variant with a die-cast housing.">Diecast Receptacle</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="activeoptics">
-            <div class="rimg"><img src="/_blob/11b298109f12ac6cf090a559d86f5258" alt="D-Lightsys®"></div>
+            <input class="rx" type="checkbox" id="rx-d-lightsys">
+            <div class="rimg"><img src="/_blob/11b298109f12ac6cf090a559d86f5258" alt="D-Lightsys®" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">Active Optics</div>
               <h3>D-Lightsys®</h3>
-              <p>Optical transmitters, receivers and transceivers for demanding environments.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="A D-Lightsys optical module range for data transmission in demanding environments.">S-Light</span><span class="sub" tabindex="0" data-tip="A D-Lightsys optical transmitter, receiver and transceiver range.">D-Light</span><span class="sub" tabindex="0" data-tip="An optical module range within the D-Lightsys offering.">E-Light</span></div>
+              <label class="rmore" for="rx-d-lightsys" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical transmitters, receivers and transceivers for demanding environments.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="A D-Lightsys optical module range for data transmission in demanding environments.">S-Light</span><span class="sub" tabindex="0" data-tip="A D-Lightsys optical transmitter, receiver and transceiver range.">D-Light</span><span class="sub" tabindex="0" data-tip="An optical module range within the D-Lightsys offering.">E-Light</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="space">
-            <div class="rimg"><img src="/_blob/db5e977c6aa5f073f8891675e14937ad" alt="ORBIX"></div>
+            <input class="rx" type="checkbox" id="rx-orbix">
+            <div class="rimg"><img src="/_blob/db5e977c6aa5f073f8891675e14937ad" alt="ORBIX" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">Space</div>
               <h3>ORBIX</h3>
-              <p>Coaxial connector and cable assembly solutions for New Space applications.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="ORBIX coaxial connector variants using SMA or SMA 2.9 interfaces.">SMA / SMA 2.9</span><span class="sub" tabindex="0" data-tip="ORBIX coaxial connector variants using SMP or locking SMP interfaces.">SMP / SMP-LOCK</span><span class="sub" tabindex="0" data-tip="ORBIX miniature coaxial connector variants using SMPM or locking SMPM interfaces.">SMPM / SMPM-LOCK</span><span class="sub" tabindex="0" data-tip="ORBIX adapters for connecting compatible coaxial interfaces.">Coaxial adapters</span><span class="sub" tabindex="0" data-tip="An ORBIX coaxial cable assembly option in the 0.047 size.">Cable: 0.047</span><span class="sub" tabindex="0" data-tip="Flexible SHF cable assembly options within the ORBIX offering.">Cable: SHF 2.4M / 3M / 4.6M / 5M</span></div>
+              <label class="rmore" for="rx-orbix" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Coaxial connector and cable assembly solutions for New Space applications.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="ORBIX coaxial connector variants using SMA or SMA 2.9 interfaces.">SMA / SMA 2.9</span><span class="sub" tabindex="0" data-tip="ORBIX coaxial connector variants using SMP or locking SMP interfaces.">SMP / SMP-LOCK</span><span class="sub" tabindex="0" data-tip="ORBIX miniature coaxial connector variants using SMPM or locking SMPM interfaces.">SMPM / SMPM-LOCK</span><span class="sub" tabindex="0" data-tip="ORBIX adapters for connecting compatible coaxial interfaces.">Coaxial adapters</span><span class="sub" tabindex="0" data-tip="An ORBIX coaxial cable assembly option in the 0.047 size.">Cable: 0.047</span><span class="sub" tabindex="0" data-tip="Flexible SHF cable assembly options within the ORBIX offering.">Cable: SHF 2.4M / 3M / 4.6M / 5M</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="opticalcables">
-            <div class="rimg"><img src="/_blob/4286ed3fec6fcf5d16e9ba8733979fb7" alt="Armadillo"></div>
+            <input class="rx" type="checkbox" id="rx-armadillo">
+            <div class="rimg"><img src="/_blob/4286ed3fec6fcf5d16e9ba8733979fb7" alt="Armadillo" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">Optical Cables</div>
               <h3>Armadillo</h3>
-              <p>Rugged fibre-optic cable assembly solutions.</p>
-            <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Armadillo fibre-optic cable assemblies using LC or SC connector interfaces.">LC / SC assemblies</span><span class="sub" tabindex="0" data-tip="An Armadillo fibre-optic cable assembly option with lightweight armour.">Light Armor Armadillo</span></div>
+              <label class="rmore" for="rx-armadillo" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Rugged fibre-optic cable assembly solutions.</p>
+                <div class="subs"><span class="sl">Sub-ranges</span><span class="sub" tabindex="0" data-tip="Armadillo fibre-optic cable assemblies using LC or SC connector interfaces.">LC / SC assemblies</span><span class="sub" tabindex="0" data-tip="An Armadillo fibre-optic cable assembly option with lightweight armour.">Light Armor Armadillo</span></div>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="rfconnectors">
-            <div class="rimg"><img src="/_blob/3306cc797e5b15d5a87b1d29bf9c24e4" alt="Cryonium"></div>
+            <input class="rx" type="checkbox" id="rx-cryonium">
+            <div class="rimg"><img src="/_blob/3306cc797e5b15d5a87b1d29bf9c24e4" alt="Cryonium" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">RF Connectors</div>
               <h3>Cryonium</h3>
-              <p>Cryogenic interconnect and microwave solutions for quantum applications.</p>
+              <label class="rmore" for="rx-cryonium" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Cryogenic interconnect and microwave solutions for quantum applications.</p>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="rfconnectors">
-            <div class="rimg"><img src="/_blob/85f064339e93ca9a379a0935c3458440" alt="COAXIPACK 2"></div>
+            <input class="rx" type="checkbox" id="rx-coaxipack-2">
+            <div class="rimg"><img src="/_blob/85f064339e93ca9a379a0935c3458440" alt="COAXIPACK 2" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">RF Connectors</div>
               <h3>COAXIPACK 2</h3>
-              <p>RF interconnect solutions for electronic systems.</p>
+              <label class="rmore" for="rx-coaxipack-2" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="rfconnectors">
-            <div class="rimg"><img src="/_blob/aac645776c9215c9fe738f297a6eb14c" alt="CoaxHD70"></div>
+            <input class="rx" type="checkbox" id="rx-coaxhd70">
+            <div class="rimg"><img src="/_blob/aac645776c9215c9fe738f297a6eb14c" alt="CoaxHD70" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">RF Connectors</div>
               <h3>CoaxHD70</h3>
-              <p>RF interconnect solutions for electronic systems.</p>
+              <label class="rmore" for="rx-coaxhd70" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
             </div>
           </article>
           <article class="rcard" data-domain="rfconnectors">
-            <div class="rimg"><img src="/_blob/1b9dd7e3e5f0c828506bc376c13a3911" alt="F2C-40"></div>
+            <input class="rx" type="checkbox" id="rx-f2c-40">
+            <div class="rimg"><img src="/_blob/1b9dd7e3e5f0c828506bc376c13a3911" alt="F2C-40" loading="lazy"></div>
             <div class="rbody">
               <div class="rdom">RF Connectors</div>
               <h3>F2C-40</h3>
-              <p>RF interconnect solutions for electronic systems.</p>
+              <label class="rmore" for="rx-f2c-40" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-m-loc">
+            <div class="rimg"><img src="/_blob/e2f20cc447cbbe90c382ccfda6a548eb" alt="M-Loc" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>M-Loc</h3>
+              <label class="rmore" for="rx-m-loc" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-pim-max">
+            <div class="rimg"><img src="/_blob/742e1a11902c425386f1bd7fe8a746f3" alt="PIM-MAX" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>PIM-MAX</h3>
+              <label class="rmore" for="rx-pim-max" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-power-max">
+            <div class="rimg"><img src="/_blob/5615ffbcef0b8596ad3b22bc706ea7da" alt="POWER-MAX" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>POWER-MAX</h3>
+              <label class="rmore" for="rx-power-max" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-smp-com">
+            <div class="rimg"><img src="/_blob/9329eb8106a6311e977d49807db96f34" alt="SMP-COM" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>SMP-COM</h3>
+              <label class="rmore" for="rx-smp-com" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-smp-max">
+            <div class="rimg"><img src="/_blob/c478b97354d1dc4ed008034fa065b5f6" alt="SMP-MAX" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>SMP-MAX</h3>
+              <label class="rmore" for="rx-smp-max" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-smb-lock">
+            <div class="rimg"><img src="/_blob/aeb6b469cf1db2dea25ecc4169c29c25" alt="SMB-LOCK" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>SMB-LOCK</h3>
+              <label class="rmore" for="rx-smb-lock" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-smp-lock">
+            <div class="rimg"><img src="/_blob/a546313a0c201abe97812b88f2b4cd5a" alt="SMP-LOCK" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>SMP-LOCK</h3>
+              <label class="rmore" for="rx-smp-lock" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-smpm-lock">
+            <div class="rimg"><img src="/_blob/206277def9fd2971fbaa6c3f95b8f547" alt="SMPM-LOCK" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>SMPM-LOCK</h3>
+              <label class="rmore" for="rx-smpm-lock" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-moebius">
+            <div class="rimg"><img src="/_blob/9abdff9a88c2cfaed988af7e14e380ed" alt="MOEBIUS" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>MOEBIUS</h3>
+              <label class="rmore" for="rx-moebius" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-qcd">
+            <div class="rimg"><img src="/_blob/1ed146eb7f06d883dcb9dc7da37fb196" alt="QCD" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>QCD</h3>
+              <label class="rmore" for="rx-qcd" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-qre">
+            <div class="rimg"><img src="/_blob/1595b29f2e231d063b9ccc7ccbde5cc6" alt="QRE" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>QRE</h3>
+              <label class="rmore" for="rx-qre" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="rfconnectors">
+            <input class="rx" type="checkbox" id="rx-wqma">
+            <div class="rimg"><img src="/_blob/de9bb75bcc0cf72ccbd3f4f68a005828" alt="WQMA" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">RF Connectors</div>
+              <h3>WQMA</h3>
+              <label class="rmore" for="rx-wqma" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF interconnect solutions for electronic systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-dsx">
+            <div class="rimg"><img src="/_blob/ec419b30949d7f63ff8afd058868102a" alt="DSX" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>DSX</h3>
+              <label class="rmore" for="rx-dsx" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-mpx">
+            <div class="rimg"><img src="/_blob/7aa7c950b01d734cebf23c30c1b4a9ce" alt="MPX" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>MPX</h3>
+              <label class="rmore" for="rx-mpx" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-nsx">
+            <div class="rimg"><img src="/_blob/3a47aa11e70f3c766c314322a077c4c9" alt="NSX" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>NSX</h3>
+              <label class="rmore" for="rx-nsx" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-qm">
+            <div class="rimg"><img src="/_blob/947ce332c3e5f5245b8c23cdc1d696ba" alt="QM" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>QM</h3>
+              <label class="rmore" for="rx-qm" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-hdqx">
+            <div class="rimg"><img src="/_blob/86a0063f93cb73dc32a899e2f1fc2f6f" alt="HDQX" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>HDQX</h3>
+              <label class="rmore" for="rx-hdqx" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-quickfusio">
+            <div class="rimg"><img src="/_blob/8b11613dd8f3f9dfe601ec5cd0b5e55c" alt="QuickFusio" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>QuickFusio</h3>
+              <label class="rmore" for="rx-quickfusio" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-quick-install">
+            <div class="rimg"><img src="/_blob/13f3a54cb83cc43c83dd0d1470119275" alt="Quick Install" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>Quick Install</h3>
+              <label class="rmore" for="rx-quick-install" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-quick-slim">
+            <div class="rimg"><img src="/_blob/49f5eb197cb1a021ddade092c2652631" alt="Quick Slim" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>Quick Slim</h3>
+              <label class="rmore" for="rx-quick-slim" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-mm">
+            <div class="rimg"><img src="/_blob/be6df7319db3959c1aa8cd9d6440379f" alt="MM" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>MM</h3>
+              <label class="rmore" for="rx-mm" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-mb">
+            <div class="rimg"><img src="/_blob/e65060b545074105b6b391cc336af9ef" alt="MB" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>MB</h3>
+              <label class="rmore" for="rx-mb" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-mmc">
+            <div class="rimg"><img src="/_blob/8c764a1f68c6c2dce1818b3f9b2bca56" alt="MMC" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>MMC</h3>
+              <label class="rmore" for="rx-mmc" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-b-mcs-r">
+            <div class="rimg"><img src="/_blob/f8584ca5409d1846b16a8535de6e9575" alt="B / MCS-R" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>B / MCS-R</h3>
+              <label class="rmore" for="rx-b-mcs-r" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-taranis">
+            <div class="rimg"><img src="/_blob/aea4dd72a841823906ed132c19dfeffd" alt="Taranis" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>Taranis</h3>
+              <label class="rmore" for="rx-taranis" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="multipin">
+            <input class="rx" type="checkbox" id="rx-sic">
+            <div class="rimg"><img src="/_blob/dc8b5aedf99dd17f040d10f2584a2c10" alt="SIC" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Multipin</div>
+              <h3>SIC</h3>
+              <label class="rmore" for="rx-sic" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Multipin interconnect solutions for demanding systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-luxcis-arinc-801">
+            <div class="rimg"><img src="/_blob/cc30df99364ab8c3fcc82a95f3b45f14" alt="LuxCis ARINC 801" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>LuxCis ARINC 801</h3>
+              <label class="rmore" for="rx-luxcis-arinc-801" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-38999-luxcis">
+            <div class="rimg"><img src="/_blob/e23524a368a9aa1f163282bf4196c8ea" alt="38999 LuxCis" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>38999 LuxCis</h3>
+              <label class="rmore" for="rx-38999-luxcis" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-eb-luxcis">
+            <div class="rimg"><img src="/_blob/0f699a32fab78eabd978becf78981263" alt="EB-LuxCis" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>EB-LuxCis</h3>
+              <label class="rmore" for="rx-eb-luxcis" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-eb-tactical">
+            <div class="rimg"><img src="/_blob/9f4a06171f7dd5d4d3faf24bb28924a8" alt="EB Tactical" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>EB Tactical</h3>
+              <label class="rmore" for="rx-eb-tactical" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-ez-lux">
+            <div class="rimg"><img src="/_blob/e0d893f3753fcd07d16bbfae1282757c" alt="EZ-Lux" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>EZ-Lux</h3>
+              <label class="rmore" for="rx-ez-lux" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-q-mtitan">
+            <div class="rimg"><img src="/_blob/e6d65e3e5b197a206cef385142462494" alt="Q-MTitan" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>Q-MTitan</h3>
+              <label class="rmore" for="rx-q-mtitan" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-c-mtitan">
+            <div class="rimg"><img src="/_blob/8b42ed96a88cb3adc9ca3921ae7e4099" alt="C-MTitan" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>C-MTitan</h3>
+              <label class="rmore" for="rx-c-mtitan" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="fibreoptics">
+            <input class="rx" type="checkbox" id="rx-lxc-r">
+            <div class="rimg"><img src="/_blob/db6fc71d0890dff73528b165e026955a" alt="LxC-R" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Fibre Optics</div>
+              <h3>LxC-R</h3>
+              <label class="rmore" for="rx-lxc-r" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Optical interconnect solutions for demanding environments.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="outdoor">
+            <input class="rx" type="checkbox" id="rx-rxf">
+            <div class="rimg"><img src="/_blob/8bc59d144f6af01b089d448308dc8882" alt="RXF" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Outdoor</div>
+              <h3>RXF</h3>
+              <label class="rmore" for="rx-rxf" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Rugged interconnect solutions for outdoor installations.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="outdoor">
+            <input class="rx" type="checkbox" id="rx-opus">
+            <div class="rimg"><img src="/_blob/38c64b62883f70b780385b6791ff0166" alt="OPUS" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Outdoor</div>
+              <h3>OPUS</h3>
+              <label class="rmore" for="rx-opus" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Rugged interconnect solutions for outdoor installations.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="outdoor">
+            <input class="rx" type="checkbox" id="rx-r2ct">
+            <div class="rimg"><img src="/_blob/f551806e8f34975405c7c9d4a3647962" alt="R2CT" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Outdoor</div>
+              <h3>R2CT</h3>
+              <label class="rmore" for="rx-r2ct" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Rugged interconnect solutions for outdoor installations.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="switches">
+            <input class="rx" type="checkbox" id="rx-ramses">
+            <div class="rimg"><img src="/_blob/4dc57b8f6cd5a801c05a5830b6972058" alt="RAMSES" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Switches</div>
+              <h3>RAMSES</h3>
+              <label class="rmore" for="rx-ramses" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF and microwave switching solutions.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="switches">
+            <input class="rx" type="checkbox" id="rx-platinum">
+            <div class="rimg"><img src="/_blob/48cc2c4755c0f3a54656ed1e4cd0d589" alt="PLATINUM" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Switches</div>
+              <h3>PLATINUM</h3>
+              <label class="rmore" for="rx-platinum" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF and microwave switching solutions.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="switches">
+            <input class="rx" type="checkbox" id="rx-titanium">
+            <div class="rimg"><img src="/_blob/6ae7228bf01495462a99339a34fc6336" alt="TITANIUM" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Switches</div>
+              <h3>TITANIUM</h3>
+              <label class="rmore" for="rx-titanium" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF and microwave switching solutions.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="switches">
+            <input class="rx" type="checkbox" id="rx-quartz-s">
+            <div class="rimg"><img src="/_blob/9689bc8d2f866052bba824d842976a84" alt="QUARTZ-S" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Switches</div>
+              <h3>QUARTZ-S</h3>
+              <label class="rmore" for="rx-quartz-s" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>RF and microwave switching solutions.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="microwave">
+            <input class="rx" type="checkbox" id="rx-platinum-terminations">
+            <div class="rimg"><img src="/_blob/e034422674da907ea7d19d2fe875595a" alt="Platinum Terminations" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Microwave</div>
+              <h3>Platinum Terminations</h3>
+              <label class="rmore" for="rx-platinum-terminations" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Passive components for microwave systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="microwave">
+            <input class="rx" type="checkbox" id="rx-platinum-attenuators">
+            <div class="rimg"><img src="/_blob/3f9b86d9f646f2e53b5bb7088814aa00" alt="Platinum Attenuators" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Microwave</div>
+              <h3>Platinum Attenuators</h3>
+              <label class="rmore" for="rx-platinum-attenuators" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Passive components for microwave systems.</p>
+              </div>
+            </div>
+          </article>
+          <article class="rcard" data-domain="heavyduty">
+            <input class="rx" type="checkbox" id="rx-fortero">
+            <div class="rimg"><img src="/_blob/a2f710ca712e578ed62104fa1f745cf9" alt="Fortero" loading="lazy"></div>
+            <div class="rbody">
+              <div class="rdom">Heavy Duty</div>
+              <h3>Fortero</h3>
+              <label class="rmore" for="rx-fortero" title="Show the full description">&hellip;</label>
+              <div class="rpop">
+                <p>Heavy-duty industrial connector solutions.</p>
+              </div>
             </div>
           </article>
         </div>
-        <details class="alldetails">
-          <summary>Show the full range index &middot; 44 more</summary>
-          <div class="alltable"><div class="allgroup"><div class="gh">Fibre Optics &middot; 8 ranges</div><div class="allrow"><div class="rn">LuxCis ARINC 801</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div><div class="allrow"><div class="rn">38999 LuxCis</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div><div class="allrow"><div class="rn">EB-LuxCis</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div><div class="allrow"><div class="rn">EB Tactical</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div><div class="allrow"><div class="rn">EZ-Lux</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div><div class="allrow"><div class="rn">Q-MTitan</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div><div class="allrow"><div class="rn">C-MTitan</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div><div class="allrow"><div class="rn">LxC-R</div><div class="rd">Optical interconnect solutions for demanding environments.</div></div></div><div class="allgroup"><div class="gh">Heavy Duty &middot; 1 ranges</div><div class="allrow"><div class="rn">Fortero</div><div class="rd">Heavy-duty industrial connector solutions.</div></div></div><div class="allgroup"><div class="gh">Microwave &middot; 2 ranges</div><div class="allrow"><div class="rn">Platinum Terminations</div><div class="rd">Passive components for microwave systems.</div></div><div class="allrow"><div class="rn">Platinum Attenuators</div><div class="rd">Passive components for microwave systems.</div></div></div><div class="allgroup"><div class="gh">Multipin &middot; 14 ranges</div><div class="allrow"><div class="rn">DSX</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">MPX</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">NSX</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">QM</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">HDQX</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">QuickFusio</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">Quick Install</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">Quick Slim</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">MM</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">MB</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">MMC</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">B / MCS-R</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">Taranis</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div><div class="allrow"><div class="rn">SIC</div><div class="rd">Multipin interconnect solutions for demanding systems.</div></div></div><div class="allgroup"><div class="gh">Outdoor &middot; 3 ranges</div><div class="allrow"><div class="rn">RXF</div><div class="rd">Rugged interconnect solutions for outdoor installations.</div></div><div class="allrow"><div class="rn">OPUS</div><div class="rd">Rugged interconnect solutions for outdoor installations.</div></div><div class="allrow"><div class="rn">R2CT</div><div class="rd">Rugged interconnect solutions for outdoor installations.</div></div></div><div class="allgroup"><div class="gh">RF Connectors &middot; 12 ranges</div><div class="allrow"><div class="rn">M-Loc</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">PIM-MAX</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">POWER-MAX</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">SMP-COM</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">SMP-MAX</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">SMB-LOCK</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">SMP-LOCK</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">SMPM-LOCK</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">MOEBIUS</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">QCD</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">QRE</div><div class="rd">RF interconnect solutions for electronic systems.</div></div><div class="allrow"><div class="rn">WQMA</div><div class="rd">RF interconnect solutions for electronic systems.</div></div></div><div class="allgroup"><div class="gh">Switches &middot; 4 ranges</div><div class="allrow"><div class="rn">RAMSES</div><div class="rd">RF and microwave switching solutions.</div></div><div class="allrow"><div class="rn">PLATINUM</div><div class="rd">RF and microwave switching solutions.</div></div><div class="allrow"><div class="rn">TITANIUM</div><div class="rd">RF and microwave switching solutions.</div></div><div class="allrow"><div class="rn">QUARTZ-S</div><div class="rd">RF and microwave switching solutions.</div></div></div></div>
-        </details>
+        <div class="rangefoot">
+          <label class="showmore" for="showall"></label>
+          <a class="totop" href="#ranges" aria-label="Back to the top of the ranges">&#8593;</a>
+        </div>
       </div>
     </section>
 
@@ -661,44 +1296,44 @@
           <a class="btn btn-ghost btn-sm" href="Category.dc.html">Request a quote &#8599;</a>
         </div>
         <div class="feat2grid" style="margin-top:20px;">
-          <article class="rcard" data-domain="rfconnectors">
+          <article class="rcard">
             <div class="rimg"><img src="/_blob/76c6883876f2588ac6ab294c8a52f3cf" alt="IMP"></div>
             <div class="rbody">
               <div class="rdom">RF Connectors</div>
               <h3>IMP</h3>
-              <p>Miniature pressure-contact interconnects for solderless board-to-board connections.</p>
+              <div class="rpop"><p>Miniature pressure-contact interconnects for solderless board-to-board connections.</p></div>
             </div>
           </article>
-          <article class="rcard" data-domain="rfcables">
+          <article class="rcard">
             <div class="rimg"><img src="/_blob/5162901d5ceeebca19563065ce769886" alt="TestPro™"></div>
             <div class="rbody">
               <div class="rdom">RF Cables</div>
               <h3>TestPro™</h3>
-              <p>RF test cable assemblies for repeatable laboratory and measurement connections.</p>
+              <div class="rpop"><p>RF test cable assemblies for repeatable laboratory and measurement connections.</p></div>
             </div>
           </article>
-          <article class="rcard" data-domain="rfcables">
+          <article class="rcard">
             <div class="rimg"><img src="/_blob/6f19b497899f035696c5f4cebbc0f30c" alt="SHF"></div>
             <div class="rbody">
               <div class="rdom">RF Cables</div>
               <h3>SHF</h3>
-              <p>Low-loss, high-frequency flexible RF cable assemblies.</p>
+              <div class="rpop"><p>Low-loss, high-frequency flexible RF cable assemblies.</p></div>
             </div>
           </article>
-          <article class="rcard" data-domain="space">
+          <article class="rcard">
             <div class="rimg"><img src="/_blob/db5e977c6aa5f073f8891675e14937ad" alt="ORBIX"></div>
             <div class="rbody">
               <div class="rdom">Space</div>
               <h3>ORBIX</h3>
-              <p>Coaxial connector and cable assembly solutions for New Space applications.</p>
+              <div class="rpop"><p>Coaxial connector and cable assembly solutions for New Space applications.</p></div>
             </div>
           </article>
-          <article class="rcard" data-domain="outdoor">
+          <article class="rcard">
             <div class="rimg"><img src="/_blob/804678af1999650b26cd60f3a85129bc" alt="OCTIS™"></div>
             <div class="rbody">
               <div class="rdom">Outdoor</div>
               <h3>OCTIS™</h3>
-              <p>Rugged connectivity solutions for outdoor and industrial installations.</p>
+              <div class="rpop"><p>Rugged connectivity solutions for outdoor and industrial installations.</p></div>
             </div>
           </article>
         </div>

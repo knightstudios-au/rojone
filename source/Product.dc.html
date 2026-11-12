@@ -68,7 +68,7 @@
     .cart-count{position:absolute;top:-5px;right:-8px;background:var(--red);color:#fff;font-size:9.5px;
                 font-weight:700;min-width:15px;height:15px;border-radius:9px;display:flex;
                 align-items:center;justify-content:center;padding:0 4px;}
-    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;border-bottom:1px solid #d8e0ee;}
+    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;}
     .catnav .wrap{display:flex;align-items:center;gap:16px;}
     .catnav .wrap::-webkit-scrollbar{display:none;}
     .catnav a{display:flex;align-items:center;gap:5px;color:var(--navy);text-decoration:none;
@@ -125,6 +125,9 @@
                display:flex;flex-direction:column;flex:1;gap:7px;}
     .sku{font-size:11.5px;color:#8b9099;letter-spacing:.04em;}
     .card h3{font-size:16px;font-weight:600;line-height:1.3;min-height:42px;}
+    .plink{color:inherit;text-decoration:none;}
+    .plink:hover{color:var(--red);}
+    a.card-img{text-decoration:none;}
     .spec{font-size:12.5px;color:var(--muted);}
     .avail{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}
     .avail.back{color:var(--amber);}
@@ -234,9 +237,22 @@
       .footgrid{grid-template-columns:1fr;gap:24px;}
     }
   
+    /* ---- round 4 client feedback ---- */
+    /* Justified body copy, wide measures only. Narrow card copy stays left
+       aligned, because justification at that width opens rivers of white space. */
+    .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+      text-align:justify;text-justify:inter-word;}
+    @media (max-width:640px){
+      .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+        text-align:left;}
+    }
+    /* Only the current page is marked in the top nav. */
+    .mainnav a.on{color:var(--red);}
+    .mainnav .navdrop.on>summary{color:var(--red);}
+
     /* product detail */
     .pdp{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;padding:4px 0 52px;}
-    .gal-main{border:1px solid var(--line);border-radius:3px;background:#fff;height:430px;
+    .gal-main{position:relative;border:1px solid var(--line);border-radius:3px;background:#fff;height:320px;
       display:flex;align-items:center;justify-content:center;padding:36px;}
     .gal-main img{max-width:100%;max-height:100%;object-fit:contain;}
     .gal-thumbs{display:flex;gap:10px;margin-top:12px;}
@@ -276,6 +292,38 @@
     .specs th,.specs td{padding:11px 2px;border-bottom:1px solid var(--line);vertical-align:top;}
     .specs td{color:#3d4450;}
     .prose p{color:#3d4450;font-size:14.2px;margin:0 0 14px;}
+    /* switchable gallery, no script */
+    .gv-in{position:absolute;opacity:0;pointer-events:none;}
+    .gal-main .gv{display:none;max-width:100%;max-height:100%;object-fit:contain;}
+    #gv-1:checked ~ .gal-main .gv-1,#gv-2:checked ~ .gal-main .gv-2,#gv-3:checked ~ .gal-main .gv-3{display:block;}
+    .gal-thumbs label{position:relative;width:82px;height:82px;border:1px solid var(--line);
+                      border-radius:3px;display:flex;align-items:center;justify-content:center;
+                      padding:8px;background:#fff;cursor:pointer;}
+    .gal-thumbs label img{max-width:100%;max-height:100%;object-fit:contain;}
+    .gal-thumbs .gal-lbl{position:absolute;left:0;right:0;bottom:3px;text-align:center;
+                         font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+                         color:#8b9099;}
+    #gv-1:checked ~ .gal-thumbs label[for="gv-1"],
+    #gv-2:checked ~ .gal-thumbs label[for="gv-2"],
+    #gv-3:checked ~ .gal-thumbs label[for="gv-3"]{border-color:var(--red);box-shadow:0 0 0 1px var(--red) inset;}
+    /* stock summary */
+    .stockline{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px;margin-bottom:5px;}
+    .stockline .instock{color:var(--green);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;}
+    .stockline .qtyavail{color:var(--navy);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;}
+    .bigqty{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+            color:var(--muted);margin:0 0 14px;}
+    .bigqty a{color:var(--red);font-weight:700;text-decoration:underline;}
+    /* specification tabs, no script */
+    .sp-in{position:absolute;opacity:0;pointer-events:none;}
+    .spec-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px;}
+    .spec-tabs label{background:#fff;color:var(--navy);border:1px solid var(--line-2);border-radius:3px;
+                     cursor:pointer;font-size:13px;font-weight:600;padding:9px 16px;
+                     transition:background .12s,border-color .12s,color .12s;}
+    .spec-tabs label:hover{border-color:var(--red);color:var(--red);}
+    .sp-panel{display:none;}
+    #sp-el:checked ~ .sp-panel.sp-el,#sp-me:checked ~ .sp-panel.sp-me{display:block;}
+    #sp-el:checked ~ .spec-tabs label[for="sp-el"],
+    #sp-me:checked ~ .spec-tabs label[for="sp-me"]{background:var(--red);border-color:var(--red);color:#fff;}
     .docs{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
     .doc{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:3px;
       padding:13px 15px;text-decoration:none;background:#fff;}
@@ -292,17 +340,17 @@
     .rel{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
     @media (max-width:1080px){
       .pdp{grid-template-columns:1fr 1fr;gap:30px;}
-      .gal-main{height:360px;}
+      .gal-main{height:286px;}
       .buy h1{font-size:27px;}
       .rel{grid-template-columns:repeat(2,1fr);}
     }
     @media (max-width:880px){
       .pdp{grid-template-columns:1fr;gap:28px;}
       .twocol{grid-template-columns:1fr;gap:30px;}
-      .gal-main{height:330px;}
+      .gal-main{height:268px;}
     }
     @media (max-width:640px){
-      .gal-main{height:260px;padding:22px;}
+      .gal-main{height:232px;padding:20px;}
       .gal-thumbs span{width:66px;height:66px;}
       .buy h1{font-size:23px;}
       .buy-price b{font-size:33px;}
@@ -374,7 +422,7 @@
             <div class="mega-foot">Example category structure &middot; final catalogue to be confirmed.</div>
           </div>
         </details>
-        <details class="catmenu current" name="catnav">
+        <details class="catmenu" name="catnav">
           <summary>RF Connectors &amp; Adaptors <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
         </details>
@@ -411,11 +459,18 @@
 
     <div class="pdp">
       <div class="gal">
-        <div class="gal-main"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA male to N-Type female adaptor, 50 ohm"></div>
+        <input class="gv-in" type="radio" name="galview" id="gv-1" checked>
+        <input class="gv-in" type="radio" name="galview" id="gv-2">
+        <input class="gv-in" type="radio" name="galview" id="gv-3">
+        <div class="gal-main">
+          <img class="gv gv-1" src="/_blob/d10457fe33226b1dd000c661350acb74" alt="SMA male to N-Type female adaptor, 50 ohm">
+          <img class="gv gv-2" src="/_blob/666c42442f0b5cf7057775cc990194db" alt="Illustrative mechanical drawing of the adaptor">
+          <img class="gv gv-3" src="/_blob/ecc89a2249b2c08b5b763f3bf0621295" alt="Adaptor shown with related connectors">
+        </div>
         <div class="gal-thumbs">
-          <span class="on"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="Product view 1"></span>
-          <span><img src="/_blob/2f3807a1e642b2501e87d469667d5c85" alt="Product view 2"></span>
-          <span><img src="/_blob/ecc89a2249b2c08b5b763f3bf0621295" alt="Product view 3"></span>
+          <label for="gv-1"><img src="/_blob/d10457fe33226b1dd000c661350acb74" alt="Product view"></label>
+          <label for="gv-2"><img src="/_blob/666c42442f0b5cf7057775cc990194db" alt="Mechanical drawing"><span class="gal-lbl">Drawing</span></label>
+          <label for="gv-3"><img src="/_blob/ecc89a2249b2c08b5b763f3bf0621295" alt="Alternative view"></label>
         </div>
       </div>
 
@@ -423,7 +478,11 @@
         <div class="sku">RJ-SMA-1421</div>
         <h1>SMA Male to N-Type Female Adaptor, 50&#937;</h1>
         <div class="spec">Rojone &middot; SMA to N-Type &middot; 50&#937; &middot; DC to 11 GHz</div>
-        <div class="avail">In stock &middot; Ingleburn NSW</div>
+        <div class="stockline">
+          <span class="instock">In stock</span>
+          <span class="qtyavail">Quantity available: 428</span>
+        </div>
+        <p class="bigqty">Need a larger quantity? <a href="#contact">Contact us</a>.</p>
 
         <div class="buy-price"><b>$18.40</b> <span>AUD each</span></div>
         <div class="exgst">Excludes GST and freight. Trade account pricing applies at checkout.</div>
@@ -434,17 +493,7 @@
           <a class="btn btn-ghost" href="#quote">Add to quote</a>
         </div>
 
-        <table class="breaks">
-          <caption>Quantity pricing</caption>
-          <tr><th>1 &ndash; 9</th><td>$18.40</td></tr>
-          <tr><th>10 &ndash; 24</th><td>$16.95</td></tr>
-          <tr><th>25 &ndash; 99</th><td>$15.40</td></tr>
-          <tr><th>100 +</th><td>$13.80</td></tr>
-        </table>
-
         <ul class="meta">
-          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#167a3c" stroke-width="2.2"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>
-            Same-day dispatch from Ingleburn on orders placed before 2pm AEST.</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2"><path d="M12 3l8 4v5c0 4.4-3.3 8.2-8 9-4.7-.8-8-4.6-8-9V7z"/><path d="M9 12.2l2.1 2.1 4-4.2"/></svg>
             Certificate of conformity available on request. ISO 9001 certified.</li>
           <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62666e" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
@@ -458,28 +507,33 @@
         <div>
           <h2>Specifications</h2>
           <p class="lead">Electrical and mechanical data for RJ-SMA-1421.</p>
-          <table class="specs">
-            <tr><th>Impedance</th><td>50&#937;</td></tr>
-            <tr><th>Frequency range</th><td>DC to 11 GHz</td></tr>
-            <tr><th>VSWR</th><td>1.25:1 maximum</td></tr>
-            <tr><th>Connector A</th><td>SMA male</td></tr>
-            <tr><th>Connector B</th><td>N-Type female</td></tr>
-            <tr><th>Body material</th><td>Brass, nickel plated</td></tr>
-            <tr><th>Centre contact</th><td>Beryllium copper, gold plated</td></tr>
-            <tr><th>Dielectric</th><td>PTFE</td></tr>
-            <tr><th>Operating temperature</th><td>&minus;65&#176;C to +165&#176;C</td></tr>
-            <tr><th>Compliance</th><td>RoHS compliant</td></tr>
-          </table>
+          <input class="sp-in" type="radio" name="spectab" id="sp-el" checked>
+          <input class="sp-in" type="radio" name="spectab" id="sp-me">
+          <div class="spec-tabs">
+            <label for="sp-el">Electrical</label>
+            <label for="sp-me">Mechanical</label>
+          </div>
+          <div class="sp-panel sp-el">
+            <table class="specs">
+              <tr><th>Impedance</th><td>50&#937;</td></tr>
+              <tr><th>Frequency range</th><td>DC to 11 GHz</td></tr>
+              <tr><th>VSWR</th><td>1.25:1 maximum</td></tr>
+            </table>
+          </div>
+          <div class="sp-panel sp-me">
+            <table class="specs">
+              <tr><th>Connector A</th><td>SMA male</td></tr>
+              <tr><th>Connector B</th><td>N-Type female</td></tr>
+              <tr><th>Body material</th><td>Brass, nickel plated</td></tr>
+              <tr><th>Centre contact</th><td>Beryllium copper, gold plated</td></tr>
+              <tr><th>Dielectric</th><td>PTFE</td></tr>
+              <tr><th>Operating temperature</th><td>&minus;65&#176;C to +165&#176;C</td></tr>
+              <tr><th>Compliance</th><td>RoHS compliant</td></tr>
+            </table>
+          </div>
         </div>
         <div>
-          <h2>About this adaptor</h2>
-          <p class="lead">Where it fits and what to watch for.</p>
-          <div class="prose">
-            <p>A precision between-series adaptor pairing an SMA male with an N-Type female, used where a test lead or small-diameter assembly has to meet N-Type infrastructure without an additional cable run.</p>
-            <p>Typical applications include antenna and feeder testing, base station and repeater installation, laboratory measurement setups, and GPS repeater distribution where an SMA-terminated lead meets N-Type hardware.</p>
-            <p>The usable frequency range is limited by the N-Type interface rather than the SMA, so DC to 11 GHz applies to the pair. If you need the full SMA range, talk to us about an SMA to SMA solution instead.</p>
-          </div>
-          <h2 style="margin-top:28px;">Documents</h2>
+          <h2>Documents</h2>
           <p class="lead">Datasheets and certificates for this part.</p>
           <div class="docs">
             <a class="doc" href="#datasheet">
@@ -490,7 +544,7 @@
               <span><b>Certificate of conformity</b><small>Issued per order on request</small></span><span class="pill">Request &#8599;</span></a>
             <a class="doc" href="#drawing">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ac0000" stroke-width="1.8"><path d="M3 7l9-4 9 4-9 4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>
-              <span><b>Mechanical drawing</b><small>PDF and STEP on request</small></span><span class="pill">Request &#8599;</span></a>
+              <span><b>Mechanical drawing</b><small>SVG &middot; illustrative example</small></span><span class="pill">Download &#8595;</span></a>
           </div>
         </div>
       </div>
@@ -555,7 +609,7 @@
           </div>
         </a>
       </div>
-      <p class="footnote">Design preview &middot; specifications, pricing and quantity breaks are indicative and to be validated against the live catalogue before launch.</p>
+      <p class="footnote">Design preview &middot; specifications, pricing and stock quantities are indicative and to be validated against the live catalogue before launch.</p>
     </section>
   </main>
 
