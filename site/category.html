@@ -67,7 +67,7 @@
     .cart-count{position:absolute;top:-5px;right:-8px;background:var(--red);color:#fff;font-size:9.5px;
                 font-weight:700;min-width:15px;height:15px;border-radius:9px;display:flex;
                 align-items:center;justify-content:center;padding:0 4px;}
-    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;border-bottom:1px solid #d8e0ee;}
+    .catnav{background:var(--panel);border-top:1px solid #d8e0ee;}
     .catnav .wrap{display:flex;align-items:center;gap:16px;}
     .catnav .wrap::-webkit-scrollbar{display:none;}
     .catnav a{display:flex;align-items:center;gap:5px;color:var(--navy);text-decoration:none;
@@ -236,6 +236,19 @@
       .footgrid{grid-template-columns:1fr;gap:24px;}
     }
   
+    /* ---- round 4 client feedback ---- */
+    /* Justified body copy, wide measures only. Narrow card copy stays left
+       aligned, because justification at that width opens rivers of white space. */
+    .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+      text-align:justify;text-justify:inter-word;}
+    @media (max-width:640px){
+      .banner p,.story-lede,.tlrow p,.mfhero p.lede2,.prose p,.storynote,.mfnote,.footnote,.support p{
+        text-align:left;}
+    }
+    /* Only the current page is marked in the top nav. */
+    .mainnav a.on{color:var(--red);}
+    .mainnav .navdrop.on>summary{color:var(--red);}
+
 </style>
 </head>
 <body>
