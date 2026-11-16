@@ -12,6 +12,7 @@ PAGES = {
     'Product.dc.html':  ('/product',  'product.html', 'RJ-SMA-1421 SMA Male to N-Type Female Adaptor | Rojone'),
     'About.dc.html':    ('/about',    'about.html',   'About Us | Rojone'),
     'Manufacturer.dc.html': ('/radiall', 'radiall.html', 'Radiall | Rojone'),
+    'Manufacturers.dc.html': ('/manufacturers', 'manufacturers.html', 'Our Manufacturers | Rojone'),
 }
 LINKS = {k: v[0] for k, v in PAGES.items()}
 
