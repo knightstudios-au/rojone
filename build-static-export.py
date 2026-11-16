@@ -25,6 +25,9 @@ def uri(bid):
     return "data:%s;base64,%s" % (m, base64.b64encode(open(p, 'rb').read()).decode())
 
 
+FAVICON = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJSb2pvbmUiPgogIDxnIGZpbGw9IiNkMDIxMjgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00OC44MzcgLTI0My41MDApIHNjYWxlKDEuODgxNzEpIj4KICAgIDxyZWN0IHg9IjM5LjAwIiB5PSIyMzQuNTAiIHdpZHRoPSIxODguMDAiIGhlaWdodD0iNjEuMDAiIHJ4PSI5LjAwIiB0cmFuc2Zvcm09InJvdGF0ZSgtNDUgMTMzLjAwIDI2NS4wMCkiLz4KICAgIDxyZWN0IHg9IjE2NS43NSIgeT0iMjY0LjAwIiB3aWR0aD0iMTA3LjUwIiBoZWlnaHQ9IjYxLjAwIiByeD0iOS4wMCIgdHJhbnNmb3JtPSJyb3RhdGUoLTQ1IDIxOS41MCAyOTQuNTApIi8+CiAgPC9nPgo8L3N2Zz4K"
+
+
 def build(src, title, out):
     h = open(os.path.join(SRC, src), encoding='utf-8').read()
     hel = re.search(r'<helmet>(.*?)</helmet>', h, re.S).group(1)
@@ -40,6 +43,10 @@ def build(src, title, out):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
+<link rel="icon" href="{FAVICON}" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1b2a4a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {links}
