@@ -114,30 +114,76 @@
     .sortsel{font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line-2);
              border-radius:2px;background:#fff;color:var(--navy);}
 
-    /* catalogue cards */
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    /* catalogue cards: five across, sized for a large catalogue */
+    .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
     .card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:3px;
           overflow:hidden;background:#fff;}
     .card:hover{box-shadow:0 4px 14px rgba(20,30,60,.09);}
-    .card-img{height:172px;display:flex;align-items:center;justify-content:center;padding:18px;background:#fff;}
+    .card-img{height:124px;display:flex;align-items:center;justify-content:center;
+              padding:13px;background:#fff;}
     .card-img img{max-width:100%;max-height:100%;object-fit:contain;}
-    .card-body{background:var(--soft);border-top:1px solid var(--line);padding:16px 18px 18px;
-               display:flex;flex-direction:column;flex:1;gap:7px;}
-    .sku{font-size:11.5px;color:#8b9099;letter-spacing:.04em;}
-    .card h3{font-size:16px;font-weight:600;line-height:1.3;min-height:42px;}
+    .card-body{background:var(--soft);border-top:1px solid var(--line);padding:12px 13px 14px;
+               display:flex;flex-direction:column;flex:1;gap:5px;}
+    .sku{font-size:10.5px;color:#8b9099;letter-spacing:.04em;}
+    .card h3{font-size:13.5px;font-weight:600;line-height:1.3;min-height:35px;}
     .plink{color:inherit;text-decoration:none;}
     .plink:hover{color:var(--red);}
     a.card-img{text-decoration:none;}
-    .spec{font-size:12.5px;color:var(--muted);}
-    .avail{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}
+    .spec{font-size:11.5px;color:var(--muted);}
+    .avail{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);}
     .avail.back{color:var(--amber);}
-    .price{font-family:Barlow,Arial,sans-serif;font-size:25px;font-weight:700;color:var(--navy);
-           display:flex;align-items:baseline;gap:6px;}
-    .price span{font-family:Inter,Arial,sans-serif;font-size:11.5px;font-weight:600;color:var(--muted);}
-    .cardacts{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px;}
+    .price{font-family:Barlow,Arial,sans-serif;font-size:20px;font-weight:700;color:var(--navy);
+           display:flex;align-items:baseline;gap:5px;}
+    .price span{font-family:Inter,Arial,sans-serif;font-size:10.5px;font-weight:600;color:var(--muted);}
+    .cardacts{display:grid;grid-template-columns:1fr;gap:6px;margin-top:3px;}
+    .cardacts .btn{padding:8px 10px;font-size:11px;text-align:center;}
+
+    /* ---- table view ---- */
+    .tv-in{position:absolute;opacity:0;pointer-events:none;}
+    .tvtoggle{cursor:pointer;user-select:none;}
+    .tvtoggle .tv-b{display:none;}
+    #tableview:checked ~ .toolbar .tvtoggle{background:var(--navy);border-color:var(--navy);color:#fff;}
+    #tableview:checked ~ .toolbar .tvtoggle .tv-a{display:none;}
+    #tableview:checked ~ .toolbar .tvtoggle .tv-b{display:inline;}
+
+    .tvhead{display:none;}
+    #tableview:checked ~ .tvhead{display:grid;grid-template-columns:104px minmax(0,1fr) 104px 116px 168px;
+            gap:0 16px;align-items:center;padding:0 14px 9px;margin-bottom:-1px;
+            font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+            color:#8b9099;border-bottom:1px solid var(--line-2);}
+    #tableview:checked ~ .cards{grid-template-columns:1fr;gap:0;}
+    #tableview:checked ~ .cards .card{flex-direction:row;align-items:stretch;border-radius:0;
+            border-top:0;}
+    #tableview:checked ~ .cards .card:first-child{border-top:1px solid var(--line);}
+    #tableview:checked ~ .cards .card:hover{box-shadow:none;background:var(--soft);}
+    #tableview:checked ~ .cards .card-img{width:104px;flex:none;height:auto;padding:10px;
+            align-self:center;}
+    #tableview:checked ~ .cards .card-img img{max-height:72px;}
+    #tableview:checked ~ .cards .card-body{background:transparent;border-top:0;
+            display:grid;grid-template-columns:minmax(0,1fr) 104px 116px 168px;gap:2px 16px;align-items:center;
+            padding:12px 14px;
+            grid-template-areas:"sku avail price acts" "title avail price acts" "spec avail price acts";}
+    #tableview:checked ~ .cards .sku{grid-area:sku;}
+    #tableview:checked ~ .cards .card h3{grid-area:title;min-height:0;font-size:14.5px;}
+    #tableview:checked ~ .cards .spec{grid-area:spec;}
+    #tableview:checked ~ .cards .avail{grid-area:avail;}
+    #tableview:checked ~ .cards .price{grid-area:price;font-size:21px;}
+    #tableview:checked ~ .cards .cardacts{grid-area:acts;grid-template-columns:1fr;gap:5px;margin:0;}
     .ds{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
         color:var(--red);text-decoration:underline;margin-top:4px;}
     .footnote{font-size:12.5px;color:#8b9099;margin-top:22px;}
+
+    @media (max-width:1080px){ .cards{grid-template-columns:repeat(3,1fr);} }
+    @media (max-width:860px){
+      .cards{grid-template-columns:repeat(2,1fr);}
+      /* a phone has no room for aligned columns, so table view becomes a compact list */
+      #tableview:checked ~ .tvhead{display:none;}
+      #tableview:checked ~ .cards .card-body{display:flex;flex-direction:column;
+              align-items:flex-start;gap:4px;padding:12px 13px;}
+      #tableview:checked ~ .cards .card-img{width:88px;height:88px;padding:8px;align-self:flex-start;}
+      #tableview:checked ~ .cards .cardacts{display:grid;grid-template-columns:1fr 1fr;
+              gap:6px;width:100%;margin-top:4px;}
+    }
 
     /* footer */
     .foot{background:var(--navy);color:#c3cde0;}
@@ -162,7 +208,7 @@
       text-transform:uppercase;white-space:nowrap;padding:12px 0;border-bottom:2px solid transparent;}
     .catmenu>summary::-webkit-details-marker{display:none;}
     .catmenu>summary:hover{color:var(--red);}
-    .catmenu[open]>summary{color:var(--red);border-bottom-color:var(--red);}
+    .catmenu[open]>summary{color:var(--red);}
     .catmenu.current>summary{color:var(--red);border-bottom-color:var(--red);}
     .family-panel{position:absolute;top:100%;left:-14px;min-width:238px;background:#fff;
       border:1px solid var(--line-2);box-shadow:0 16px 28px rgba(20,30,60,.15);
@@ -184,7 +230,7 @@
     .mega-columns h3{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
       color:var(--navy);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--line);}
     .mega-columns a{display:block;padding:5px 0;font-size:13px;color:#535860;text-decoration:none;}
-    .mega-columns a:hover{color:var(--red);text-decoration:underline;}
+    .mega-columns a:hover{color:var(--red);}
     .mega-foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);
       font-size:12px;color:#8b9099;}
     .navdrop{position:relative;}
@@ -206,7 +252,7 @@
       .mainnav{display:none;}
       .head-search{max-width:220px;}
       .layout{grid-template-columns:210px 1fr;gap:24px;}
-      .cards{grid-template-columns:repeat(2,1fr);}
+      .cards{grid-template-columns:repeat(4,1fr);}
       .banner h1{font-size:33px;}
     }
     @media (max-width:880px){
@@ -232,7 +278,6 @@
       .icon-label{display:none;}
       .btn{padding:10px 14px;font-size:11.5px;}
       .banner h1{font-size:27px;}
-      .cards{grid-template-columns:1fr;}
       .card-img{height:200px;}
       .footgrid{grid-template-columns:1fr;gap:24px;}
     }
@@ -249,6 +294,18 @@
     /* Only the current page is marked in the top nav. */
     .mainnav a.on{color:var(--red);}
     .mainnav .navdrop.on>summary{color:var(--red);}
+    /* ---- back to top, every page ---- */
+    .backtop{position:sticky;bottom:26px;z-index:45;display:flex;justify-content:flex-end;
+             padding:0 28px;pointer-events:none;height:0;}
+    .backtop a{pointer-events:auto;width:42px;height:42px;border-radius:50%;background:#fff;
+               border:1px solid var(--line-2);box-shadow:0 6px 16px rgba(20,30,60,.14);
+               display:flex;align-items:center;justify-content:center;color:var(--navy);
+               text-decoration:none;font-size:16px;line-height:1;transform:translateY(-42px);}
+    .backtop a:hover{border-color:var(--red);color:var(--red);}
+    @media (max-width:640px){
+      .backtop{padding:0 16px;bottom:18px;}
+      .backtop a{width:38px;height:38px;}
+    }
 
     /* ---- about / history ---- */
     .story-lede{max-width:62ch;color:#4a5566;font-size:15px;line-height:1.65;margin:12px 0 0;}
@@ -277,6 +334,17 @@
     .decmark .dmeta{margin-top:8px;font-size:11.5px;font-weight:700;letter-spacing:.1em;
                     text-transform:uppercase;color:#9aa1ab;}
     .decmark .dbar{margin-top:14px;width:46px;height:3px;background:var(--red);}
+    .tlshots{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px;max-width:540px;}
+    .tlshots figure{margin:0;}
+    .tlshots img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;
+                 border:1px solid var(--line);border-radius:3px;}
+    .tlshots .ph{aspect-ratio:4/3;border:1px dashed var(--line-2);border-radius:3px;
+                 background:var(--soft);display:flex;align-items:center;justify-content:center;
+                 text-align:center;padding:10px;color:#9aa1ab;font-size:11px;font-weight:700;
+                 letter-spacing:.07em;text-transform:uppercase;line-height:1.5;}
+    .tlshots figcaption{margin-top:7px;font-size:11px;font-weight:700;letter-spacing:.08em;
+                        text-transform:uppercase;color:#8b9099;}
+    @media (max-width:640px){ .tlshots{gap:9px;margin-top:12px;} }
     .tl{list-style:none;margin:0;padding:0;position:relative;}
     .tl::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;
                 width:1px;background:#eef0f3;}
@@ -295,17 +363,6 @@
               padding:26px 30px;margin:44px 0 0;flex-wrap:wrap;}
     .storycta h2{font-size:21px;font-weight:700;margin:0 0 5px;}
     .storycta p{margin:0;color:#4a5566;font-size:14px;}
-    .backtop{position:sticky;bottom:26px;z-index:45;display:flex;justify-content:flex-end;
-             padding:0 28px;pointer-events:none;height:0;}
-    .backtop a{pointer-events:auto;width:42px;height:42px;border-radius:50%;background:#fff;
-               border:1px solid var(--line-2);box-shadow:0 6px 16px rgba(20,30,60,.14);
-               display:flex;align-items:center;justify-content:center;color:var(--navy);
-               text-decoration:none;font-size:16px;line-height:1;transform:translateY(-42px);}
-    .backtop a:hover{border-color:var(--red);color:var(--red);}
-    @media (max-width:640px){
-      .backtop{padding:0 16px;bottom:18px;}
-      .backtop a{width:38px;height:38px;}
-    }
     .storynote{color:#8b9099;font-size:12px;line-height:1.6;padding:26px 0 46px;
                border-top:1px solid var(--line);margin-top:40px;max-width:84ch;}
 
@@ -401,13 +458,13 @@
     </div>
   </div>
 
-  <header class="site-head">
+  <header class="site-head" id="top">
     <div class="headbar">
       <div class="wrap">
         <a class="logo" href="Main.dc.html"><img src="/_blob/0dd5b61fc6ec6dd7ea94adf1413a7cdb" alt="Rojone Pty Ltd"></a>
         <nav class="mainnav">
           <a href="Main.dc.html">Home</a>
-          <a href="About.dc.html" class="on">About us</a>
+          <a href="About.dc.html">About us</a>
         <details class="navdrop">
           <summary>Manufacturers <span class="caret">&#9660;</span></summary>
           <div class="drop"><a href="Manufacturer.dc.html">Amphenol</a><a href="Manufacturer.dc.html">Astro Tool</a><a href="Manufacturer.dc.html">Cooper Antennas</a><a href="Manufacturer.dc.html">Fairview Microwave</a><a href="Manufacturer.dc.html">Fischer Connectors</a><a href="Manufacturer.dc.html">Freelin-Wade</a><a href="Manufacturer.dc.html">L-com</a><a href="Manufacturer.dc.html">MilesTek</a><a href="Manufacturer.dc.html">Pasternack</a><a href="Manufacturer.dc.html">Radiall</a><a href="Manufacturer.dc.html">RFS</a><a href="Manufacturer.dc.html">Spinner</a><a href="Manufacturer.dc.html">Times Microwave</a><div class="sep"></div><a href="Manufacturers.dc.html">All manufacturers &rarr;</a></div>
@@ -448,7 +505,7 @@
             <div class="mega-foot">Example category structure &middot; final catalogue to be confirmed.</div>
           </div>
         </details>
-        <details class="catmenu" name="catnav">
+        <details class="catmenu current" name="catnav">
           <summary>RF Connectors &amp; Adaptors <span class="caret">&#9660;</span></summary>
           <div class="family-panel"><a href="Category.dc.html">BNC</a><a href="Category.dc.html">N-Type</a><a href="Category.dc.html">RF Adaptors</a><a href="Category.dc.html">SMA</a><a href="Category.dc.html">TNC</a><a href="Category.dc.html">UHF &amp; F-Type</a></div>
         </details>
@@ -479,7 +536,7 @@
       </div>
     </nav>
   </header>
-  <main id="top">
+  <main>
     <div class="wrap">
       <div class="crumb"><a href="Main.dc.html">Home</a> &nbsp;/&nbsp; About Us</div>
       <div class="banner">
@@ -506,10 +563,10 @@
       <div class="decbar">
         <div class="wrap">
           <span class="decbar-label">Jump to</span>
-          <label for="dec-all">All<span class="count">29</span></label>
+          <label for="dec-all">All<span class="count">34</span></label>
           <label for="dec-2020">2020s<span class="count">8</span></label>
-          <label for="dec-2010">2010s<span class="count">7</span></label>
-          <label for="dec-2000">2000s<span class="count">4</span></label>
+          <label for="dec-2010">2010s<span class="count">11</span></label>
+          <label for="dec-2000">2000s<span class="count">5</span></label>
           <label for="dec-1990">1990s<span class="count">4</span></label>
           <label for="dec-1980">1980s<span class="count">5</span></label>
           <label for="dec-1970">1970s<span class="count">1</span></label>
@@ -571,7 +628,7 @@
         <div class="wrap">
           <div class="decmark">
             <div class="dnum">2010s</div>
-            <div class="dmeta">7 milestones</div>
+            <div class="dmeta">11 milestones</div>
             <div class="dbar"></div>
           </div>
           <ol class="tl">
@@ -586,14 +643,38 @@
               <p>Mobile One acquisition; ISO 9001:2015; distributor award; RADHAZ nomination.</p>
             </li>
             <li class="tlrow">
+              <div class="yr">2017</div>
+              <h3>New warehouse acquisition and fit out</h3>
+              <p>Addition of a 615 m² stocking warehouse for receiving and despatch.</p>
+            </li>
+            <li class="tlrow">
               <div class="yr">2016</div>
               <h3>Systems and partnerships</h3>
               <p>Microsoft NAV ERP; COJOT partnership.</p>
             </li>
             <li class="tlrow">
+              <div class="yr">2016</div>
+              <h3>Solar panel installation</h3>
+              <p>For both cost savings and a smaller environmental footprint.</p>
+            </li>
+            <li class="tlrow">
               <div class="yr">2015</div>
               <h3>Defence supply</h3>
               <p>Contract for 4,200 power distribution units. New ERP upgrade.</p>
+            </li>
+            <li class="tlrow">
+              <div class="yr">2015</div>
+              <h3>Modernised building</h3>
+              <p>Reskinning the building aesthetically and environmentally, creating an energy-saving thermal skin shading the original structure.</p>
+              <div class="tlshots">
+                  <figure><div class="ph">Before photo<br>to come</div><figcaption>Before</figcaption></figure>
+                  <figure><div class="ph">After photo<br>to come</div><figcaption>After</figcaption></figure>
+              </div>
+            </li>
+            <li class="tlrow">
+              <div class="yr">2015</div>
+              <h3>New bulk storage warehouse</h3>
+              <p>Addition of 315 m² of storage to stock more cables.</p>
             </li>
             <li class="tlrow">
               <div class="yr">2014</div>
@@ -617,7 +698,7 @@
         <div class="wrap">
           <div class="decmark">
             <div class="dnum">2000s</div>
-            <div class="dmeta">4 milestones</div>
+            <div class="dmeta">5 milestones</div>
             <div class="dbar"></div>
           </div>
           <ol class="tl">
@@ -625,6 +706,11 @@
               <div class="yr">2009</div>
               <h3>Pasternack partnership</h3>
               <p>Distribution agreement signed.</p>
+            </li>
+            <li class="tlrow">
+              <div class="yr">2008</div>
+              <h3>Eleonore Cato passes</h3>
+              <p>Livia Brady becomes sole Director, carrying on her mother&#x27;s passion.</p>
             </li>
             <li class="tlrow">
               <div class="yr">2006</div>
@@ -701,7 +787,7 @@
             <li class="tlrow">
               <div class="yr">1983</div>
               <h3>The Rojone name</h3>
-              <p>Rojone Pty Ltd registered.</p>
+              <p>Rojone Pty Ltd registered. Mother and daughter joint directorship formalised.</p>
             </li>
             <li class="tlrow">
               <div class="yr">1982</div>
@@ -730,7 +816,6 @@
       </div>
     </div>
 
-    <div class="backtop"><a href="#top" aria-label="Back to the top of the page">&#8593;</a></div>
 
     <div class="wrap">
       <div class="storycta">
@@ -748,6 +833,8 @@
       single year where a programme ran across several.</p>
     </div>
   </main>
+
+    <div class="backtop"><a href="#top" aria-label="Back to the top of the page">&#8593;</a></div>
 <footer class="foot">
     <div class="wrap">
       <div class="footgrid">
